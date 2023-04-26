@@ -1,5 +1,6 @@
 import pygame
 import Const
+import CellClass
 
 # import json
 
@@ -16,6 +17,8 @@ def Run():
 
 	running = True
 
+	cell = CellClass.DestroyableCell(gameScreen, (screenWidth - screenHeight, 0))
+
 	# f = open("Assets/Example.json")
 
 	while running :
@@ -24,4 +27,5 @@ def Run():
 			if event.type == pygame.QUIT:
 				running = False
 
+		cell.DisplayBackgroundImage()
 		pygame.display.update()
