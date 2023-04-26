@@ -1,7 +1,27 @@
 import pygame
 import Const
 
-# import json
+import json
+
+def getMap():
+	mapFile = open("Assets/Example.json")
+
+	curMap = []
+
+	mapData = json.load(mapFile)
+
+	curList = mapData['1']['map']['grid']
+
+	m = len(curList)
+	n = len(curList[0])
+
+	for i in curList:
+		row = []
+		for j in i:
+			row.append(j)
+		curMap.append(row)
+
+	return curMap
 
 def Run():
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -16,7 +36,9 @@ def Run():
 
 	running = True
 
-	# f = open("Assets/Example.json")
+	mapList = getMap()
+
+	print(mapList)
 
 	while running :
 		gameScreen.fill((100, 100, 100))
