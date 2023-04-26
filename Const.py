@@ -1,1 +1,0 @@
-CELLLENGTH = 48
