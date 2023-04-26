@@ -1,0 +1,3 @@
+import InGame
+
+InGame.Run()
