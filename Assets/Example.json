@@ -49,13 +49,13 @@
             "rows": 15,
             "columns": 15,
             "grid": [
-            "0OOXOOO",
-            "OZZZZZO",
-            "OZZXZZO",
-            "XZXXXZX",
-            "OZZXZZO",
-            "OZZZZZO",
-            "OOOXOO1"
+            "0..#...",
+            ".*****.",
+            ".**#**.",
+            "#*###*#",
+            ".**#**.",
+            ".*****.",
+            "...#..1"
             ] 
         },
         "powerups": {
