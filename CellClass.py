@@ -1,8 +1,9 @@
 import pygame
+import Const
 
 class Cell():
 	def __init__(self, cellCoord):
-		self.cellLength = 48
+		self.cellLength = CELLLENGTH
 		self.cellCoord = cellCoord
 
 class ObstacleCell(Cell):
