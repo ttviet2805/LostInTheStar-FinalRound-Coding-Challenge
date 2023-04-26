@@ -63,7 +63,8 @@
         "list_of_powerups": [
         {"position": {"x": 4, "y": 1}, "type" : 1}, 
         {"position": {"x": 1, "y" : 1}, "type" : 1}, 
-        {"position": {"x": 1, "y" : 2}, "type" : 2}, {"position": [0, 5], "type" : 2}],
+        {"position": {"x": 1, "y" : 2}, "type" : 2}, 
+        {"position": {"x": 0, "y" : 5}, "type" : 2}]
         },
         "moves_left": 5,
         "bots": [{"position": [1, 2]}, {"position": [2, 2]}]
