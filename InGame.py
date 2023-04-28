@@ -56,7 +56,7 @@ def Run():
 		mapImage.append(row)
 	print(mapList)
 	######################################
-	player_1 = PlayerClass.Player(gameScreen)
+	player_1 = PlayerClass.Player(gameScreen, (0, 0))
 	clock = pygame.time.Clock()
 
 	while running :

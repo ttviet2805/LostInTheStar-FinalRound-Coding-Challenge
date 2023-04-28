@@ -25,7 +25,7 @@ class EmptyCell(Cell):
 		self.gameScreen = gameScreen
 		self.cellColor = "Null"
 		self.backgroundImage = {
-			"Empty Null": pygame.transform.scale(Const.CELL_IMAGE_LIST[2], (cellLen, cellLen)),
+			"Empty Null": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
 			"Empty Red": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
 			"Empty Blue": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
 			"Empty Green": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
@@ -44,7 +44,7 @@ class DestroyableCell(EmptyCell):
 		EmptyCell.__init__(self, gameScreen, cellCoord, cellLen)
 
 		self.isDestroyed = False
-		self.backgroundImage["Obstacle"] = pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen))
+		self.backgroundImage["Obstacle"] = pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen))
 
 	def DisplayBackgroundImage(self):
 		if self.isDestroyed == False:
