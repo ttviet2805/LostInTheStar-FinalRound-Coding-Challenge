@@ -53,6 +53,7 @@ def Run():
 	gameMap = MapClass.Map(gameScreen, mapList, screenHeight, statusWidth)
 
 	player_1 = PlayerClass.Player(gameScreen, gameMap.GetCell(0, 0))
+	player_2 = PlayerClass.Player(gameScreen, gameMap.GetCell(0, 5))
 
 	while running :
 		clock.tick(10)
@@ -63,6 +64,7 @@ def Run():
 		gameMap.DisplayMap()
 
 		player_1.MoveFrame()
+		player_2.MoveFrame()
 
 		for i in playerStatusList:
 			i.displayStatusImage()
