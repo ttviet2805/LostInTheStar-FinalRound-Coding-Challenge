@@ -1,6 +1,7 @@
 import pygame
 import Const
 import CellClass
+import PlayerClass
 
 import json
 
@@ -37,6 +38,7 @@ def Run():
 
 	running = True
 
+	######################################
 	# f = open("Assets/Example.json")
 	mapList = getMap()
 	N = len(mapList)
@@ -53,8 +55,12 @@ def Run():
 				row.append(CellClass.DestroyableCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
 		mapImage.append(row)
 	print(mapList)
+	######################################
+	player_1 = PlayerClass.Player(gameScreen)
+	clock = pygame.time.Clock()
 
 	while running :
+		clock.tick(10)
 		gameScreen.fill((100, 100, 100))
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -63,4 +69,6 @@ def Run():
 		for row in mapImage:
 			for cell in row:
 				cell.DisplayBackgroundImage()
+
+		player_1.MoveFrame()
 		pygame.display.update()
