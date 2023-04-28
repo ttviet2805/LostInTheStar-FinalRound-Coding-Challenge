@@ -2,34 +2,34 @@ import pygame
 import Const
 
 class Cell():
-	def __init__(self, cellCoord):
-		self.cellLength = Const.CELLLENGTH
+	def __init__(self, cellCoord, cellLen):
+		self.cellLen = cellLen
 		self.cellCoord = cellCoord
 
 class ObstacleCell(Cell):
-	def __init__(self, gameScreen, cellCoord):
-		Cell.__init__(self, cellCoord)
+	def __init__(self, gameScreen, cellCoord, cellLen):
+		Cell.__init__(self, cellCoord, cellLen)
 
 		self.gameScreen = gameScreen
 		self.backgroundImage = {
-			"Obstacle": pygame.image.load(f'Assets/Images/Cell/tile_0.png')
+			"Obstacle": pygame.transform.scale(Const.CELLIMAGELIST[0], (cellLen, cellLen))
 		}
 
 	def DisplayBackgroundImage(self):
 		self.gameScreen.blit(self.backgroundImage["Obstacle"], self.cellCoord)
 
 class EmptyCell(Cell):
-	def __init__(self, gameScreen, cellCoord):
-		Cell.__init__(self, cellCoord)
+	def __init__(self, gameScreen, cellCoord, cellLen):
+		Cell.__init__(self, cellCoord, cellLen)
 
 		self.gameScreen = gameScreen
 		self.cellColor = "Null"
 		self.backgroundImage = {
-			"Empty Null": pygame.image.load(f'Assets/Images/Cell/tile_2.png'),
-			"Empty Red": pygame.image.load(f'Assets/Images/Cell/tile_0.png'),
-			"Empty Blue": pygame.image.load(f'Assets/Images/Cell/tile_0.png'),
-			"Empty Green": pygame.image.load(f'Assets/Images/Cell/tile_0.png'),
-			"Empty Yellow": pygame.image.load(f'Assets/Images/Cell/tile_0.png')
+			"Empty Null": pygame.transform.scale(Const.CELLIMAGELIST[2], (cellLen, cellLen)),
+			"Empty Red": pygame.transform.scale(Const.CELLIMAGELIST[0], (cellLen, cellLen)),
+			"Empty Blue": pygame.transform.scale(Const.CELLIMAGELIST[0], (cellLen, cellLen)),
+			"Empty Green": pygame.transform.scale(Const.CELLIMAGELIST[0], (cellLen, cellLen)),
+			"Empty Yellow": pygame.transform.scale(Const.CELLIMAGELIST[0], (cellLen, cellLen))
 		}
 
 	def DisplayBackgroundImage(self):
@@ -40,11 +40,11 @@ class EmptyCell(Cell):
 
 
 class DestroyableCell(EmptyCell):
-	def __init__(self, gameScreen, cellCoord):
-		EmptyCell.__init__(self, gameScreen, cellCoord)
+	def __init__(self, gameScreen, cellCoord, cellLen):
+		EmptyCell.__init__(self, gameScreen, cellCoord, cellLen)
 
 		self.isDestroyed = False
-		self.backgroundImage["Obstacle"] = pygame.image.load(f'Assets/Images/Cell/tile_1.png')
+		self.backgroundImage["Obstacle"] = pygame.transform.scale(Const.CELLIMAGELIST[1], (cellLen, cellLen))
 
 	def DisplayBackgroundImage(self):
 		if self.isDestroyed == False:

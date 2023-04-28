@@ -37,11 +37,21 @@ def Run():
 
 	running = True
 
-	cell = CellClass.DestroyableCell(gameScreen, (screenWidth - screenHeight, 0))
-
 	# f = open("Assets/Example.json")
 	mapList = getMap()
-
+	N = len(mapList)
+	cellLen = screenHeight / N
+	mapImage = []
+	for i in range(0, N):
+		row = []
+		for j in range(0, N):
+			if mapList[i][j] == '0' or mapList[i][j] == '.':
+				row.append(CellClass.EmptyCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
+			elif mapList[i][j] == '#':
+				row.append(CellClass.ObstacleCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
+			else:
+				row.append(CellClass.DestroyableCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
+		mapImage.append(row)
 	print(mapList)
 
 	while running :
@@ -50,5 +60,7 @@ def Run():
 			if event.type == pygame.QUIT:
 				running = False
 
-		cell.DisplayBackgroundImage()
+		for row in mapImage:
+			for cell in row:
+				cell.DisplayBackgroundImage()
 		pygame.display.update()
