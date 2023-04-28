@@ -9,3 +9,7 @@ PLAYER_FRAME_LIST = [
 	[pygame.image.load(f'Assets/Images/Player/Down{i}.png') for i in range(0, 6)],
 	[pygame.image.load(f'Assets/Images/Player/Left{i}.png') for i in range(0, 6)]
 ]
+
+# Status
+STATUS_BACKGROUND = pygame.image.load('Assets/Images/Status/Status.png')
+PLAYER_IMAGE = pygame.image.load('Assets/Images/Status/Songoku.png')

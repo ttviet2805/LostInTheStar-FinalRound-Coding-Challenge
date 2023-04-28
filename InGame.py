@@ -2,6 +2,7 @@ import pygame
 import Const
 import CellClass
 import PlayerClass
+import PlayerStatus
 
 import json
 
@@ -38,21 +39,33 @@ def Run():
 
 	running = True
 
-	######################################
-	# f = open("Assets/Example.json")
+	# Set up Player Status
+	statusWidth = (screenWidth - screenHeight) / 2;
+	statusSize = (statusWidth, screenHeight / 2)
+	statusCoord = [(0, 0), (0, screenHeight / 2), (screenWidth - statusWidth, 0), (screenWidth - statusWidth, screenHeight / 2)]
+	playerStatusList = []
+
+	for i in range(4):
+		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet", statusCoord[i], statusSize))
+
+
+	###########################################
 	mapList = getMap()
 	N = len(mapList)
 	cellLen = screenHeight / N
 	mapImage = []
+
+	
+
 	for i in range(0, N):
 		row = []
 		for j in range(0, N):
 			if mapList[i][j] == '0' or mapList[i][j] == '.':
-				row.append(CellClass.EmptyCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
+				row.append(CellClass.EmptyCell(gameScreen, (j * cellLen + statusWidth, i * cellLen), cellLen))
 			elif mapList[i][j] == '#':
-				row.append(CellClass.ObstacleCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
+				row.append(CellClass.ObstacleCell(gameScreen, (j * cellLen + statusWidth, i * cellLen), cellLen))
 			else:
-				row.append(CellClass.DestroyableCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
+				row.append(CellClass.DestroyableCell(gameScreen, (j * cellLen + statusWidth, i * cellLen), cellLen))
 		mapImage.append(row)
 	
 	for i in range(0, N):
@@ -70,7 +83,6 @@ def Run():
 
 	while running :
 		clock.tick(10)
-		gameScreen.fill((100, 100, 100))
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				running = False
@@ -80,4 +92,8 @@ def Run():
 				cell.DisplayBackgroundImage()
 
 		player_1.MoveFrame()
+
+		for i in playerStatusList:
+			i.displayStatusImage()
+
 		pygame.display.update()
