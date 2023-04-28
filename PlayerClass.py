@@ -4,18 +4,28 @@ import CellClass
 
 class Player():
 	def __init__(self, gameScreen, curCell):
-		self.playerFrame = Const.PLAYER_FRAME_LIST
-		self.moveDirection = 2
-		self.curFrame = 0
-		self.numFrame = len(self.playerFrame[self.moveDirection])
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
 		self.playerCoord = self.playerCell.GetCenter()
+		self.playerFrameHeight = self.playerCell.GetLen() / 5 * 4
+		self.playerFrameWidth = self.playerFrameHeight / 7 * 5
+		self.playerPadding = ((self.playerCell.GetLen() - self.playerFrameWidth) / 2, (self.playerCell.GetLen() - self.playerFrameHeight) / 2) 
+
+		self.playerFrame = []
+		for listFrame in Const.PLAYER_FRAME_LIST:
+			playerFrameList = []
+			for frame in listFrame:
+				playerFrameList.append(pygame.transform.scale(frame, (self.playerFrameWidth, self.playerFrameHeight)))
+			self.playerFrame.append(playerFrameList)
+
+		self.moveDirection = 2
+		self.curFrame = 0
+		self.numFrame = len(self.playerFrame[self.moveDirection])
 		self.isMoving = False
 		self.moveSpeed = 8
 
 	def DisplayFrame(self):
-		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], self.playerCoord)
+		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
 	def MoveFrame(self):
 		self.HandleEvent()

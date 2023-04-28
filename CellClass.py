@@ -20,6 +20,9 @@ class Cell():
 			return None
 		return self.listAdj[pos]
 
+	def GetLen(self):
+		return self.cellLen
+
 class ObstacleCell(Cell):
 	def __init__(self, gameScreen, cellCoord, cellLen):
 		Cell.__init__(self, cellCoord, cellLen)
