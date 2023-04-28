@@ -6,17 +6,17 @@ import PlayerStatus
 
 import json
 
-def getMap():
+def getMap(step):
 	mapFile = open("Assets/Example.json")
 
 	curMap = []
 
 	mapData = json.load(mapFile)
 
-	curList = mapData['1']['map']['grid']
+	curList = mapData[str(step)]['map']['grid']
 
-	m = len(curList)
-	n = len(curList[0])
+	m = mapData[str(step)]['map']['rows']
+	n = mapData[str(step)]['map']['columns']
 
 	for i in curList:
 		row = []
@@ -50,12 +50,10 @@ def Run():
 
 
 	###########################################
-	mapList = getMap()
+	mapList = getMap(0)
 	N = len(mapList)
 	cellLen = screenHeight / N
 	mapImage = []
-
-	
 
 	for i in range(0, N):
 		row = []
