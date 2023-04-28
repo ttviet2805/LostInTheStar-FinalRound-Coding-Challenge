@@ -5,6 +5,20 @@ class Cell():
 	def __init__(self, cellCoord, cellLen):
 		self.cellLen = cellLen
 		self.cellCoord = cellCoord
+		self.listAdj = [None, None, None, None]
+
+	def AddAdj(self, adjCell, pos):
+		if pos < 0 or pos > 3:
+			return
+		self.listAdj[pos] = adjCell
+
+	def GetCenter(self):
+		return self.cellCoord
+
+	def GetAdj(self, pos):
+		if pos < 0 or pos > 3:
+			return None
+		return self.listAdj[pos]
 
 class ObstacleCell(Cell):
 	def __init__(self, gameScreen, cellCoord, cellLen):
@@ -12,7 +26,7 @@ class ObstacleCell(Cell):
 
 		self.gameScreen = gameScreen
 		self.backgroundImage = {
-			"Obstacle": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen))
+			"Obstacle": pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen))
 		}
 
 	def DisplayBackgroundImage(self):

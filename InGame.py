@@ -54,9 +54,18 @@ def Run():
 			else:
 				row.append(CellClass.DestroyableCell(gameScreen, (j * cellLen + screenWidth - screenHeight, i * cellLen), cellLen))
 		mapImage.append(row)
-	print(mapList)
+	
+	for i in range(0, N):
+		for j in range(0, N):
+			for dir in range(0, 4):
+				ni = i + Const.CELL_MOVE[dir][0]
+				nj = j + Const.CELL_MOVE[dir][1]
+				if ni < 0 or ni >= N or nj < 0 or nj >= N or isinstance(mapImage[ni][nj], CellClass.ObstacleCell):
+					continue
+				mapImage[i][j].AddAdj(mapImage[ni][nj], dir)
+
 	######################################
-	player_1 = PlayerClass.Player(gameScreen, (0, 0))
+	player_1 = PlayerClass.Player(gameScreen, mapImage[0][0])
 	clock = pygame.time.Clock()
 
 	while running :
