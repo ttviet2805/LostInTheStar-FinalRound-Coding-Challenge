@@ -3,6 +3,7 @@ import Const
 import CellClass
 import PlayerClass
 import PlayerStatus
+import MapClass
 
 import json
 
@@ -28,14 +29,13 @@ def getMap(step):
 
 def Run():
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-
 	pygame.display.set_caption("BombIT")
-
 	pygame.display.flip()
 
 	screenWidth, screenHeight = pygame.display.get_surface().get_size()
-
 	print(screenWidth, screenHeight)
+
+	clock = pygame.time.Clock()
 
 	running = True
 
@@ -49,35 +49,10 @@ def Run():
 		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet", statusCoord[i], statusSize))
 
 
-	###########################################
 	mapList = getMap(0)
-	N = len(mapList)
-	cellLen = screenHeight / N
-	mapImage = []
+	gameMap = MapClass.Map(gameScreen, mapList, screenHeight, statusWidth)
 
-	for i in range(0, N):
-		row = []
-		for j in range(0, N):
-			if mapList[i][j] == '0' or mapList[i][j] == '.':
-				row.append(CellClass.EmptyCell(gameScreen, (j * cellLen + statusWidth, i * cellLen), cellLen))
-			elif mapList[i][j] == '#':
-				row.append(CellClass.ObstacleCell(gameScreen, (j * cellLen + statusWidth, i * cellLen), cellLen))
-			else:
-				row.append(CellClass.DestroyableCell(gameScreen, (j * cellLen + statusWidth, i * cellLen), cellLen))
-		mapImage.append(row)
-	
-	for i in range(0, N):
-		for j in range(0, N):
-			for dir in range(0, 4):
-				ni = i + Const.CELL_MOVE[dir][0]
-				nj = j + Const.CELL_MOVE[dir][1]
-				if ni < 0 or ni >= N or nj < 0 or nj >= N or isinstance(mapImage[ni][nj], CellClass.ObstacleCell):
-					continue
-				mapImage[i][j].AddAdj(mapImage[ni][nj], dir)
-
-	######################################
-	player_1 = PlayerClass.Player(gameScreen, mapImage[0][2])
-	clock = pygame.time.Clock()
+	player_1 = PlayerClass.Player(gameScreen, gameMap.GetCell(0, 0))
 
 	while running :
 		clock.tick(10)
@@ -85,9 +60,7 @@ def Run():
 			if event.type == pygame.QUIT:
 				running = False
 
-		for row in mapImage:
-			for cell in row:
-				cell.DisplayBackgroundImage()
+		gameMap.DisplayMap()
 
 		player_1.MoveFrame()
 
