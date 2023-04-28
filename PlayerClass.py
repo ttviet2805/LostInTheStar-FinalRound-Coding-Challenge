@@ -12,19 +12,34 @@ class Player():
 		self.playerCell = curCell
 		self.playerCoord = self.playerCell.GetCenter()
 		self.isMoving = False
+		self.moveSpeed = 8
 
 	def DisplayFrame(self):
 		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], self.playerCoord)
 
 	def MoveFrame(self):
 		self.HandleEvent()
+		if self.isMoving:
+			self.MovePlayer()
 		self.DisplayFrame()
 		self.curFrame = (self.curFrame + 1) % self.numFrame
 
 	def MovePlayer(self):
 		newCell = self.playerCell.GetAdj(self.moveDirection)
-		self.playerCell = newCell
-		self.playerCoord = self.playerCell.GetCenter()
+		if self.playerCoord == newCell.GetCenter():
+			self.playerCell = newCell
+			self.playerCoord = self.playerCell.GetCenter()
+			self.isMoving = False
+			return
+		newCoord = []
+		for i in range(0, 2):
+			moveLen = min(abs(newCell.GetCenter()[i] - self.playerCoord[i]), self.moveSpeed)
+			newCoord.append(self.playerCoord[i])
+			if(newCell.GetCenter()[i] > self.playerCoord[i]):
+				newCoord[i] += moveLen
+			else:
+				newCoord[i] -= moveLen
+		self.playerCoord = tuple(newCoord)
 
 	def ChangeDirection(self, newDirection):
 		if self.isMoving or newDirection > 3 or newDirection < 0:
@@ -35,11 +50,11 @@ class Player():
 			self.numFrame = len(self.playerFrame[self.moveDirection])
 
 		if self.playerCell.GetAdj(self.moveDirection) != None:
-			self.MovePlayer() 
+			self.isMoving = True
 
 	def HandleEvent(self):
 		key = pygame.key.get_pressed()
-		# print(key[pygame.K_w])
+
 		if key[pygame.K_UP]:
 			self.ChangeDirection(0)
 		if key[pygame.K_DOWN]:

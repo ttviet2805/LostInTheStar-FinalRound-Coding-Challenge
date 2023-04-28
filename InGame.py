@@ -65,7 +65,7 @@ def Run():
 				mapImage[i][j].AddAdj(mapImage[ni][nj], dir)
 
 	######################################
-	player_1 = PlayerClass.Player(gameScreen, mapImage[0][0])
+	player_1 = PlayerClass.Player(gameScreen, mapImage[0][2])
 	clock = pygame.time.Clock()
 
 	while running :
