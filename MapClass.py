@@ -10,7 +10,8 @@ class Map():
 		self.N = len(self.mapList)
 		self.mapImage = []
 
-		cellLen = self.mapSize / self.N
+		cellLen = self.mapSize // self.N
+		mapInitCoord += (self.mapSize - cellLen * self.N) / 2
 
 		# create map
 		for i in range(0, self.N):
