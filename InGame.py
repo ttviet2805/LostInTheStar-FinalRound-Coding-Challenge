@@ -53,7 +53,7 @@ def Run():
 	gameMap = MapClass.Map(gameScreen, mapList, screenHeight, statusWidth)
 
 	player_1 = PlayerClass.Player(gameScreen, gameMap.GetCell(0, 0))
-	player_2 = PlayerClass.Player(gameScreen, gameMap.GetCell(0, 5))
+	player_2 = PlayerClass.Player(gameScreen, gameMap.GetCell(14, 14))
 
 	while running :
 		clock.tick(10)
