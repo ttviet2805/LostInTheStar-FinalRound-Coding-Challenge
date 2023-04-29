@@ -1,7 +1,7 @@
 import pygame
 
 CELL_LENGTH = 100
-CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(0, 3)]
+CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(0, 8)]
 CELL_MOVE = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 PLAYER_FRAME_LIST = [
 	[pygame.image.load(f'Assets/Images/Player/Up{i}.png') for i in range(0, 6)],
