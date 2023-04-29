@@ -2,10 +2,32 @@ import pygame
 import Const
 import CellClass
 
+import json
+
+def getMap(step):
+	mapFile = open("Assets/Example.json")
+
+	curMap = []
+
+	mapData = json.load(mapFile)
+
+	curList = mapData[str(step)]['map']['grid']
+
+	m = mapData[str(step)]['map']['rows']
+	n = mapData[str(step)]['map']['columns']
+
+	for i in curList:
+		row = []
+		for j in i:
+			row.append(j)
+		curMap.append(row)
+
+	return curMap
+
 class Map():
-	def __init__(self, gameScreen, mapList, mapSize, mapInitCoord):
+	def __init__(self, gameScreen, mapSize, mapInitCoord):
 		self.gameScreen = gameScreen
-		self.mapList = mapList
+		self.mapList = getMap(0)
 		self.mapSize = mapSize
 		self.N = len(self.mapList)
 		self.mapImage = []

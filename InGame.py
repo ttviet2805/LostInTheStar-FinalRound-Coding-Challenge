@@ -5,28 +5,6 @@ import PlayerClass
 import PlayerStatus
 import MapClass
 
-import json
-
-def getMap(step):
-	mapFile = open("Assets/Example.json")
-
-	curMap = []
-
-	mapData = json.load(mapFile)
-
-	curList = mapData[str(step)]['map']['grid']
-
-	m = mapData[str(step)]['map']['rows']
-	n = mapData[str(step)]['map']['columns']
-
-	for i in curList:
-		row = []
-		for j in i:
-			row.append(j)
-		curMap.append(row)
-
-	return curMap
-
 def Run():
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 	pygame.display.set_caption("BombIT")
@@ -49,8 +27,8 @@ def Run():
 		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet", statusCoord[i], statusSize))
 
 
-	mapList = getMap(0)
-	gameMap = MapClass.Map(gameScreen, mapList, screenHeight, statusWidth)
+	# Map
+	gameMap = MapClass.Map(gameScreen, screenHeight, statusWidth)
 
 	player_1 = PlayerClass.Player(gameScreen, gameMap.GetCell(0, 0))
 	player_2 = PlayerClass.Player(gameScreen, gameMap.GetCell(14, 14))
