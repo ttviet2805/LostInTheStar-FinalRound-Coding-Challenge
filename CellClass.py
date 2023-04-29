@@ -43,10 +43,10 @@ class EmptyCell(Cell):
 		self.cellColor = "Null"
 		self.backgroundImage = {
 			"Empty Null": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
-			"Empty Red": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
-			"Empty Blue": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
-			"Empty Green": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
-			"Empty Yellow": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen))
+			"Empty Red": pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen)),
+			"Empty Blue": pygame.transform.scale(Const.CELL_IMAGE_LIST[2], (cellLen, cellLen)),
+			"Empty Green": pygame.transform.scale(Const.CELL_IMAGE_LIST[3], (cellLen, cellLen)),
+			"Empty Yellow": pygame.transform.scale(Const.CELL_IMAGE_LIST[4], (cellLen, cellLen))
 		}
 
 	def DisplayBackgroundImage(self):

@@ -22,21 +22,26 @@ def getMap(step):
 			row.append(j)
 		curMap.append(row)
 
-	return curMap
+	return (m, n, curMap)
 
 class Map():
 	def __init__(self, gameScreen, mapSize, mapInitCoord):
 		self.gameScreen = gameScreen
-		self.mapList = getMap(0)
+
+		# Map List
+		self.mapList = getMap(1)[2]
+		self.M = getMap(1)[0]
+		self.N = getMap(1)[1]
+
+		# Map Image
 		self.mapSize = mapSize
-		self.N = len(self.mapList)
 		self.mapImage = []
 
 		cellLen = self.mapSize // self.N
 		mapInitCoord += (self.mapSize - cellLen * self.N) / 2
 
-		# create map
-		for i in range(0, self.N):
+		# Create List Cell in Map
+		for i in range(0, self.M):
 			mapImageRow = []
 			for j in range(0, self.N):
 				if self.mapList[i][j] == '0' or self.mapList[i][j] == '.':
@@ -45,8 +50,8 @@ class Map():
 					mapImageRow.append(CellClass.ObstacleCell(self.gameScreen, (j * cellLen + mapInitCoord, i * cellLen), cellLen))
 			self.mapImage.append(mapImageRow)
 		
-		# create graph
-		for i in range(0, self.N):
+		# Create Graph
+		for i in range(0, self.M):
 			for j in range(0, self.N):
 				for dir in range(0, 4):
 					ni = i + Const.CELL_MOVE[dir][0]
