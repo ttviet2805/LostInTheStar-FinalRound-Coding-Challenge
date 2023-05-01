@@ -29,9 +29,7 @@ class Map():
 		self.gameScreen = gameScreen
 
 		# Map List
-		self.mapList = getMap(1)[2]
-		self.M = getMap(1)[0]
-		self.N = getMap(1)[1]
+		self.M, self.N, self.mapList = getMap(1)
 
 		# Map Image
 		self.mapSize = mapSize
@@ -44,7 +42,7 @@ class Map():
 		for i in range(0, self.M):
 			mapImageRow = []
 			for j in range(0, self.N):
-				if self.mapList[i][j] == '0' or self.mapList[i][j] == '.':
+				if self.mapList[i][j] != '#':
 					mapImageRow.append(CellClass.EmptyCell(self.gameScreen, (j * cellLen + mapInitCoord, i * cellLen), cellLen))
 				else:
 					mapImageRow.append(CellClass.ObstacleCell(self.gameScreen, (j * cellLen + mapInitCoord, i * cellLen), cellLen))
