@@ -33,18 +33,18 @@ class ObstacleCell(Cell):
 
 		self.gameScreen = gameScreen
 		self.backgroundImage = {
-			"Obstacle": pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen))
+			"Obstacle": pygame.transform.scale(Const.CELL_IMAGE_LIST[5], (cellLen, cellLen))
 		}
 
 	def DisplayBackgroundImage(self):
 		self.gameScreen.blit(self.backgroundImage["Obstacle"], self.cellCoord)
 
 class EmptyCell(Cell):
-	def __init__(self, gameScreen, cellCoord, cellIndex, cellLen):
+	def __init__(self, gameScreen, cellCoord, cellIndex, cellLen, cellColor):
 		Cell.__init__(self, cellCoord, cellIndex, cellLen)
 
 		self.gameScreen = gameScreen
-		self.cellColor = "Null"
+		self.cellColor = cellColor
 		self.backgroundImage = {
 			"Empty Null": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
 			"Empty Red": pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen)),

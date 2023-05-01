@@ -29,6 +29,9 @@ class Player():
 	def DisplayFrame(self):
 		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
+	def GetIsMoving(self):
+		return self.isMoving
+
 	def MoveFrame(self):
 		if self.isMoving:
 			self.MovePlayer()

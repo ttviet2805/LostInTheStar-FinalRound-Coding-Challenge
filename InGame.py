@@ -5,7 +5,12 @@ import PlayerClass
 import PlayerStatus
 import MapClass
 
-import json
+def CheckMoving(playerList):
+	for i in playerList:
+		if i != None:
+			if i.GetIsMoving():
+				return True
+	return False
 
 def Run():
 	# Set up Game Window
@@ -30,22 +35,14 @@ def Run():
 		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet", statusCoord[i], statusSize))
 
 	# Set up step
-	step = 1
+	step = 0
+	isNewStep = False
 
 	# Set up Map
 	gameMap = MapClass.Map(gameScreen, screenHeight, statusWidth)
-
-	# Set up Player
-	mapFile = open("Assets/Example.json")
-	mapData = json.load(mapFile)
+	
+	# Set up player
 	playerList = []
-	for i in range(4):
-		if str(i) in mapData[str(step)]["players"]:
-			x = mapData[str(step)]["players"][str(i)]["position"]["x"]
-			y = mapData[str(step)]["players"][str(i)]["position"]["y"]
-			playerList.append(PlayerClass.Player(gameScreen, gameMap.GetCell(x, y)))
-		else:
-			playerList.append(None)
 
 	# Game Running
 	while running :
@@ -56,15 +53,28 @@ def Run():
 
 		# Handle event
 		key = pygame.key.get_pressed()
-		if key[pygame.K_RETURN]:
+		if CheckMoving(playerList) == False and key[pygame.K_RETURN]:
 			step += 1
-			if str(step) in mapData:
+			isNewStep = True
+			if step == 1:
+				# Set up Player
 				for i in range(4):
-					if str(i) in mapData[str(step)]["players"]:
-						x = mapData[str(step)]["players"][str(i)]["position"]["x"]
-						y = mapData[str(step)]["players"][str(i)]["position"]["y"]
+					if str(i) in Const.mapData[str(step)]["players"]:
+						x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
+						y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
+						playerList.append(PlayerClass.Player(gameScreen, gameMap.GetCell(x, y)))
+					else:
+						playerList.append(None)
+			elif str(step) in Const.mapData:
+				for i in range(4):
+					if str(i) in Const.mapData[str(step)]["players"]:
+						x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
+						y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
 						playerList[i].ChangeCell((x, y))
 
+		if CheckMoving(playerList) == False and isNewStep:
+			isNewStep = False
+			gameMap.UpdateMap(step)
 
 		for i in playerStatusList:
 			i.displayStatusImage()
