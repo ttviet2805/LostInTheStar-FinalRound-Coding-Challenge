@@ -2,15 +2,19 @@ import pygame
 import Const
 
 class Cell():
-	def __init__(self, cellCoord, cellLen):
+	def __init__(self, cellCoord, cellIndex, cellLen):
 		self.cellLen = cellLen
 		self.cellCoord = cellCoord
+		self.cellIndex = cellIndex
 		self.listAdj = [None, None, None, None]
 
 	def AddAdj(self, adjCell, pos):
 		if pos < 0 or pos > 3:
 			return
 		self.listAdj[pos] = adjCell
+
+	def GetCellIndex(self):
+		return self.cellIndex
 
 	def GetCenter(self):
 		return self.cellCoord
@@ -24,8 +28,8 @@ class Cell():
 		return self.cellLen
 
 class ObstacleCell(Cell):
-	def __init__(self, gameScreen, cellCoord, cellLen):
-		Cell.__init__(self, cellCoord, cellLen)
+	def __init__(self, gameScreen, cellCoord, cellIndex, cellLen):
+		Cell.__init__(self, cellCoord, cellIndex, cellLen)
 
 		self.gameScreen = gameScreen
 		self.backgroundImage = {
@@ -36,8 +40,8 @@ class ObstacleCell(Cell):
 		self.gameScreen.blit(self.backgroundImage["Obstacle"], self.cellCoord)
 
 class EmptyCell(Cell):
-	def __init__(self, gameScreen, cellCoord, cellLen):
-		Cell.__init__(self, cellCoord, cellLen)
+	def __init__(self, gameScreen, cellCoord, cellIndex, cellLen):
+		Cell.__init__(self, cellCoord, cellIndex, cellLen)
 
 		self.gameScreen = gameScreen
 		self.cellColor = "Null"
@@ -57,8 +61,8 @@ class EmptyCell(Cell):
 
 
 class DestroyableCell(EmptyCell):
-	def __init__(self, gameScreen, cellCoord, cellLen):
-		EmptyCell.__init__(self, gameScreen, cellCoord, cellLen)
+	def __init__(self, gameScreen, cellCoord, cellIndex, cellLen):
+		EmptyCell.__init__(self, gameScreen, cellCoord, cellIndex, cellLen)
 
 		self.isDestroyed = False
 		self.backgroundImage["Obstacle"] = pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen))

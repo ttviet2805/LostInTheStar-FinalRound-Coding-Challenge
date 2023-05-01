@@ -30,7 +30,6 @@ class Player():
 		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
 	def MoveFrame(self):
-		self.HandleEventFromFile()
 		if self.isMoving:
 			self.MovePlayer()
 		self.DisplayFrame()
@@ -63,6 +62,13 @@ class Player():
 
 		if self.playerCell.GetAdj(self.moveDirection) != None:
 			self.isMoving = True
+
+	def ChangeCell(self, newCellIndex):
+		for direction in range(4):
+			adjCell = self.playerCell.GetAdj(direction)
+			if adjCell != None and adjCell.GetCellIndex() == newCellIndex:
+				self.ChangeDirection(direction)
+				return
 
 	def HandleEvent(self):
 		key = pygame.key.get_pressed()

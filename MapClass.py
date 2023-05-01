@@ -43,9 +43,9 @@ class Map():
 			mapImageRow = []
 			for j in range(0, self.N):
 				if self.mapList[i][j] != '#':
-					mapImageRow.append(CellClass.EmptyCell(self.gameScreen, (j * cellLen + mapInitCoord, i * cellLen), cellLen))
+					mapImageRow.append(CellClass.EmptyCell(self.gameScreen, (j * cellLen + mapInitCoord, i * cellLen), (i, j), cellLen))
 				else:
-					mapImageRow.append(CellClass.ObstacleCell(self.gameScreen, (j * cellLen + mapInitCoord, i * cellLen), cellLen))
+					mapImageRow.append(CellClass.ObstacleCell(self.gameScreen, (j * cellLen + mapInitCoord, i * cellLen), (i, j), cellLen))
 			self.mapImage.append(mapImageRow)
 		
 		# Create Graph

@@ -5,6 +5,8 @@ import PlayerClass
 import PlayerStatus
 import MapClass
 
+import json
+
 def Run():
 	# Set up Game Window
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -27,12 +29,23 @@ def Run():
 	for i in range(4):
 		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet", statusCoord[i], statusSize))
 
+	# Set up step
+	step = 1
+
 	# Set up Map
 	gameMap = MapClass.Map(gameScreen, screenHeight, statusWidth)
 
 	# Set up Player
-	player_1 = PlayerClass.Player(gameScreen, gameMap.GetCell(0, 0))
-	player_2 = PlayerClass.Player(gameScreen, gameMap.GetCell(14, 14))
+	mapFile = open("Assets/Example.json")
+	mapData = json.load(mapFile)
+	playerList = []
+	for i in range(4):
+		if str(i) in mapData[str(step)]["players"]:
+			x = mapData[str(step)]["players"][str(i)]["position"]["x"]
+			y = mapData[str(step)]["players"][str(i)]["position"]["y"]
+			playerList.append(PlayerClass.Player(gameScreen, gameMap.GetCell(x, y)))
+		else:
+			playerList.append(None)
 
 	# Game Running
 	while running :
@@ -41,12 +54,25 @@ def Run():
 			if event.type == pygame.QUIT:
 				running = False
 
+		# Handle event
+		key = pygame.key.get_pressed()
+		if key[pygame.K_RETURN]:
+			step += 1
+			if str(step) in mapData:
+				for i in range(4):
+					if str(i) in mapData[str(step)]["players"]:
+						x = mapData[str(step)]["players"][str(i)]["position"]["x"]
+						y = mapData[str(step)]["players"][str(i)]["position"]["y"]
+						playerList[i].ChangeCell((x, y))
+
+
 		for i in playerStatusList:
 			i.displayStatusImage()
 
 		gameMap.DisplayMap()
 
-		player_1.MoveFrame()
-		player_2.MoveFrame()
+		for i in playerList:
+			if i != None:
+				i.MoveFrame()
 
 		pygame.display.update()
