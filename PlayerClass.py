@@ -1,6 +1,7 @@
 import pygame
 import Const
 import CellClass
+import PortalClass
 
 class Player():
 	def __init__(self, gameScreen, curCell):
@@ -23,16 +24,21 @@ class Player():
 		self.numFrame = len(self.playerFrame[self.moveDirection])
 		self.isMoving = False
 		self.moveSpeed = 8
-		self.instructionPath = "Assets/Instructions/Player1.txt"
-		self.instructionFile = open(self.instructionPath, 'r')
+
+		self.playerPortal = PortalClass.Portal(gameScreen, curCell)
+		self.appearFrame = 18
 
 	def DisplayFrame(self):
 		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
 	def GetIsMoving(self):
-		return self.isMoving
+		return self.isMoving or self.appearFrame > 0
 
 	def MoveFrame(self):
+		if(self.appearFrame > 0):
+			self.playerPortal.MoveFrame()
+			self.appearFrame -= 1
+			return
 		if self.isMoving:
 			self.MovePlayer()
 		self.DisplayFrame()
@@ -84,13 +90,3 @@ class Player():
 			self.ChangeDirection(3)
 		if key[pygame.K_RIGHT]:
 			self.ChangeDirection(1)
-
-	def HandleEventFromFile(self):
-		if self.isMoving:
-			return
-		key = pygame.key.get_pressed()
-		if key[pygame.K_RETURN]:
-			direction = self.instructionFile.read(1)
-			if direction == '':
-				return
-			self.ChangeDirection(int(direction))
