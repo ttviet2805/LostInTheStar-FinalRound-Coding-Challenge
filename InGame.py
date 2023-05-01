@@ -55,22 +55,23 @@ def Run():
 		key = pygame.key.get_pressed()
 		if CheckMoving(playerList) == False and key[pygame.K_RETURN]:
 			step += 1
-			isNewStep = True
-			if step == 1:
-				# Set up Player
-				for i in range(4):
-					if str(i) in Const.mapData[str(step)]["players"]:
-						x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
-						y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
-						playerList.append(PlayerClass.Player(gameScreen, gameMap.GetCell(x, y)))
-					else:
-						playerList.append(None)
-			elif str(step) in Const.mapData:
-				for i in range(4):
-					if str(i) in Const.mapData[str(step)]["players"]:
-						x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
-						y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
-						playerList[i].ChangeCell((x, y))
+			if str(step) in Const.mapData:
+				isNewStep = True
+				if step == 1:
+					# Set up Player
+					for i in range(4):
+						if str(i) in Const.mapData[str(step)]["players"]:
+							x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
+							y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
+							playerList.append(PlayerClass.Player(gameScreen, gameMap.GetCell(x, y)))
+						else:
+							playerList.append(None)
+				else:
+					for i in range(4):
+						if str(i) in Const.mapData[str(step)]["players"]:
+							x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
+							y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
+							playerList[i].ChangeCell((x, y))
 
 		if CheckMoving(playerList) == False and isNewStep:
 			isNewStep = False
