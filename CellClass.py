@@ -32,12 +32,12 @@ class ObstacleCell(Cell):
 		Cell.__init__(self, cellCoord, cellIndex, cellLen)
 
 		self.gameScreen = gameScreen
-		self.backgroundImage = {
-			"Obstacle": pygame.transform.scale(Const.CELL_IMAGE_LIST[5], (cellLen, cellLen))
-		}
+		self.backgroundImage = [
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[5], (cellLen, cellLen))
+		]
 
 	def DisplayBackgroundImage(self):
-		self.gameScreen.blit(self.backgroundImage["Obstacle"], self.cellCoord)
+		self.gameScreen.blit(self.backgroundImage[0], self.cellCoord)
 
 class EmptyCell(Cell):
 	def __init__(self, gameScreen, cellCoord, cellIndex, cellLen, cellColor):
@@ -45,36 +45,23 @@ class EmptyCell(Cell):
 
 		self.gameScreen = gameScreen
 		self.cellColor = cellColor
-		self.backgroundImage = {
-			"Empty Null": pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
-			"Empty Red": pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen)),
-			"Empty Blue": pygame.transform.scale(Const.CELL_IMAGE_LIST[2], (cellLen, cellLen)),
-			"Empty Green": pygame.transform.scale(Const.CELL_IMAGE_LIST[3], (cellLen, cellLen)),
-			"Empty Yellow": pygame.transform.scale(Const.CELL_IMAGE_LIST[4], (cellLen, cellLen))
-		}
+		self.isLocked = False
+		self.backgroundImage = [
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen)),
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[2], (cellLen, cellLen)),
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[3], (cellLen, cellLen)),
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[4], (cellLen, cellLen)),
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[6], (cellLen, cellLen))
+		]
 
 	def DisplayBackgroundImage(self):
-		self.gameScreen.blit(self.backgroundImage["Empty " + self.cellColor], self.cellCoord)
+		self.gameScreen.blit(self.backgroundImage[self.cellColor], self.cellCoord)
+		if self.isLocked:
+			self.gameScreen.blit(self.backgroundImage[5], self.cellCoord)
 
 	def ChangeCellColor(self, newColor):
 		self.cellColor = newColor
 
-
-class DestroyableCell(EmptyCell):
-	def __init__(self, gameScreen, cellCoord, cellIndex, cellLen):
-		EmptyCell.__init__(self, gameScreen, cellCoord, cellIndex, cellLen)
-
-		self.isDestroyed = False
-		self.backgroundImage["Obstacle"] = pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen))
-
-	def DisplayBackgroundImage(self):
-		if self.isDestroyed == False:
-			self.gameScreen.blit(self.backgroundImage["Obstacle"], self.cellCoord)
-		else:
-			EmptyCell.DisplayBackgroundImage(self)
-
-	def DestroyCell(self):
-		self.isDestroyed = True
-
-
-
+	def LockCell(self):
+		self.isLocked = True

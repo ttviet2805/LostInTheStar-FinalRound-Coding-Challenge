@@ -37,11 +37,9 @@ class Map():
 			mapImageRow = []
 			for j in range(0, self.N):
 				if self.mapList[i][j] == '.':
-					mapImageRow.append(CellClass.EmptyCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen, "Null"))
-				elif self.mapList[i][j] == '#':
+					mapImageRow.append(CellClass.EmptyCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen, 0))
+				else:
 					mapImageRow.append(CellClass.ObstacleCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen))
-				elif self.mapList[i][j].isupper():
-					mapImageRow.append(CellClass.EmptyCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen, "Red"))
 			self.mapImage.append(mapImageRow)
 		
 		# Create Graph
@@ -66,29 +64,30 @@ class Map():
 			for j in range(self.N):
 				if newMapList[i][j] != self.mapList[i][j]:
 					if newMapList[i][j] == '#':
-						self.mapImage[i][j] = CellClass.ObstacleCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen)
+						self.mapImage[i][j].LockCell()
 					elif newMapList[i][j].isupper():
-						newColor = "Null"
+						newColor = 0
 						if newMapList[i][j] == "A":
-							newColor = "Red"
+							newColor = 1
 						elif newMapList[i][j] == "B":
-							newColor = "Blue"
+							newColor = 2
 						elif newMapList[i][j] == "C":
-							newColor = "Green"
+							newColor = 3
 						elif newMapList[i][j] == "D":
-							newColor = "Yellow"
+							newColor = 4
 						self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen, newColor)
 					else:
-						newColor = "Null"
+						newColor = 0
 						if newMapList[i][j] == "a":
-							newColor = "Red"
+							newColor = 1
 						elif newMapList[i][j] == "b":
-							newColor = "Blue"
+							newColor = 2
 						elif newMapList[i][j] == "c":
-							newColor = "Green"
+							newColor = 3
 						elif newMapList[i][j] == "d":
-							newColor = "Yellow"
+							newColor = 4
 						self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen, newColor)
+						self.mapImage[i][j].LockCell()
 		self.mapList = newMapList
 
 	def GetCell(self, row, col):
