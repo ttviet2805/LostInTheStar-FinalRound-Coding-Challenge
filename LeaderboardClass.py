@@ -3,7 +3,7 @@ import Const
 import PlayerClass
 
 class LeaderboardInfo():
-	def __init__(self, gameScreen, containerSize, containerCoord, containerPadding, player):
+	def __init__(self, gameScreen, containerSize, containerCoord, containerPadding, player, rank):
 		self.gameScreen = gameScreen
 		self.containerSize = containerSize
 		self.containerCoord = containerCoord
@@ -14,18 +14,29 @@ class LeaderboardInfo():
 		rectPadding = 10
 		self.playerInfoCoord = (self.containerRect.left + rectPadding, self.containerRect.top + self.containerRect.height * 2 / 3 + rectPadding)
 		self.player = player
-
+		self.playerInfo = self.player.GetInfo()
+		self.playerRank = rank
 
 	def Display(self):
 		pygame.draw.rect(self.gameScreen, Const.WHITE, self.containerRect, border_radius = 15)
 		
-		self.player.DisplayInfo(self.gameScreen, self.playerInfoCoord)
+		infoFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 25)
+
+		infoName = infoFont.render("Name: " + self.playerInfo[0], True, Const.PLAYER_COLOR_DICT[self.playerInfo[2]])
+		self.gameScreen.blit(infoName, self.playerInfoCoord)
+
+		infoScore = infoFont.render("Score: " + str(self.playerInfo[1]), True, Const.PLAYER_COLOR_DICT[self.playerInfo[2]])
+		self.gameScreen.blit(infoScore, (self.playerInfoCoord[0], self.playerInfoCoord[1] + 35))
+
+		infoRank = infoFont.render("Rank: " + str(self.playerRank), True, Const.PLAYER_COLOR_DICT[self.playerInfo[2]])
+		self.gameScreen.blit(infoRank, (self.playerInfoCoord[0], self.playerInfoCoord[1] + 70))
 
 
 class Leaderboard():
 	def __init__(self, playerList):
 		self.gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-		self.gameScreen.fill(Const.GREY)
+		self.background = pygame.transform.scale(pygame.image.load("Assets/Images/Leaderboard/background.jpg"), (pygame.display.get_surface().get_size()))
+		self.gameScreen.blit(self.background, (0, 0))
 		self.screenWidth, self.screenHeight = pygame.display.get_surface().get_size()
 
 		self.playerList = playerList
@@ -40,6 +51,12 @@ class Leaderboard():
 		self.leaderboardTextRender = self.leaderboardTextFont.render(self.leaderboardText, True, Const.WHITE)
 
 		self.playerContainerNum = len(self.playerList)
+		
+		# sort
+		for i in range(self.playerContainerNum):
+			for j in range(i + 1, self.playerContainerNum):
+				if self.playerList[i].GetInfo()[1] < self.playerList[j].GetInfo()[1]:
+					self.playerList[i], self.playerList[j] = self.playerList[j], self.playerList[i]
 
 		self.playerContainerSize = (self.screenWidth / 4, self.screenHeight - (self.leaderboardTextFont.size(self.leaderboardText)[1] + 100))
 		self.playerContainerPadding = self.playerContainerSize[0] / 10
@@ -48,7 +65,7 @@ class Leaderboard():
 		self.playerContainer = []
 		for i in range(self.playerContainerNum):
 			playerContainerCoord = ((playerContainerInitCoord[0] + i * self.playerContainerSize[0], playerContainerInitCoord[1]))
-			self.playerContainer.append(LeaderboardInfo(self.gameScreen, self.playerContainerSize, playerContainerCoord, self.playerContainerPadding, self.playerList[i]))
+			self.playerContainer.append(LeaderboardInfo(self.gameScreen, self.playerContainerSize, playerContainerCoord, self.playerContainerPadding, self.playerList[i], i + 1))
 
 	def Run(self):
 		while self.running:
