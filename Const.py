@@ -1,6 +1,20 @@
 import pygame
 import json
 
+# Player
+PLAYER_COLOR = ["RED", "GREEN", "BLUE", "YELLOW"]
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
+PLAYER_COLOR_DICT = {
+	"RED": (255, 0, 0),
+	"GREEN": (0, 255, 0),
+	"BLUE": (0, 0, 255),
+	"YELLOW": (255, 255, 0)
+}
+
+
 CELL_LENGTH = 100
 CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(8)]
 CELL_MOVE = [(-1, 0), (0, 1), (1, 0), (0, -1)]

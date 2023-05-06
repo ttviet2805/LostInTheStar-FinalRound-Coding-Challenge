@@ -13,6 +13,9 @@ def CheckMoving(playerList):
 	return False
 
 def Run():
+	# Init
+	pygame.init()
+
 	# Set up Game Window
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 	pygame.display.set_caption("BombIT")
@@ -27,12 +30,13 @@ def Run():
 
 	# Set up Player Status
 	statusWidth = (screenWidth - screenHeight) / 2;
-	statusSize = (statusWidth, screenHeight / 2)
-	statusCoord = [(0, 0), (0, screenHeight / 2), (screenWidth - statusWidth, 0), (screenWidth - statusWidth, screenHeight / 2)]
+	statusHeight = screenHeight * 4 / 10
+	statusSize = (statusWidth, statusHeight)
+	statusCoord = [(0, screenHeight / 10), (0, screenHeight / 2), (screenWidth - statusWidth, screenHeight / 10), (screenWidth - statusWidth, screenHeight / 2)]
 	playerStatusList = []
 
 	for i in range(4):
-		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet", statusCoord[i], statusSize))
+		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet" + str(i), Const.PLAYER_COLOR[i], statusCoord[i], statusSize))
 
 	# Set up step
 	step = 0
@@ -87,3 +91,5 @@ def Run():
 				i.MoveFrame()
 
 		pygame.display.update()
+
+Run()
