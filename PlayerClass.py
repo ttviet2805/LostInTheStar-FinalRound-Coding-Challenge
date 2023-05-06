@@ -2,9 +2,14 @@ import pygame
 import Const
 import CellClass
 import PortalClass
+import PlayerStatus
 
 class Player():
-	def __init__(self, gameScreen, curCell):
+	def __init__(self, gameScreen, ID, statusInfo, curCell):
+		# Status
+		self.playerID = ID
+		self.status = PlayerStatus.PlayerStatus(gameScreen, "Viet" + str(ID), Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
+
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
 		self.playerCoord = self.playerCell.GetCenter()
@@ -90,3 +95,9 @@ class Player():
 			self.ChangeDirection(3)
 		if key[pygame.K_RIGHT]:
 			self.ChangeDirection(1)
+
+	def drawStatus(self):
+		self.status.displayStatusImage()
+
+	def updateScore(self, curScore):
+		self.status.updateScore(curScore)

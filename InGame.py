@@ -37,8 +37,7 @@ def Run():
 	statusCoord = [(0, screenHeight / 10), (0, screenHeight / 2), (screenWidth - statusWidth, screenHeight / 10), (screenWidth - statusWidth, screenHeight / 2)]
 	playerStatusList = []
 
-	for i in range(4):
-		playerStatusList.append(PlayerStatus.PlayerStatus(gameScreen, "Viet" + str(i), Const.PLAYER_COLOR[i], statusCoord[i], statusSize))
+	statusInfo = (statusCoord, statusSize)
 
 	# Set up step
 	step = 0
@@ -69,7 +68,7 @@ def Run():
 						if str(i) in Const.mapData[str(step)]["players"]:
 							x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
 							y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
-							playerList.append(PlayerClass.Player(gameScreen, gameMap.GetCell(x, y)))
+							playerList.append(PlayerClass.Player(gameScreen, i, statusInfo, gameMap.GetCell(x, y)))
 						else:
 							playerList.append(None)
 				else:
@@ -90,17 +89,18 @@ def Run():
 			isNewStep = False
 			gameMap.UpdateMap(step)
 
-			for i in range(4):
-				curScore = gameMap.getScore(i)
-				playerStatusList[i].updateScore(curScore)
-
-		for i in playerStatusList:
-			i.displayStatusImage()
+			cnt = 0
+			for i in playerList:
+				if i != None:
+					curScore = gameMap.getScore(cnt)
+					i.updateScore(curScore)		
+					cnt += 1	
 
 		gameMap.DisplayMap()
 
 		for i in playerList:
 			if i != None:
 				i.MoveFrame()
+				i.drawStatus()
 
 		pygame.display.update()
