@@ -28,7 +28,7 @@ def Run():
 
 	# Set up Clock
 	clock = pygame.time.Clock()
-	isEndGame = False
+	isEndGame = True
 
 	# Set up Player Status
 	statusWidth = (screenWidth - screenHeight) / 2;

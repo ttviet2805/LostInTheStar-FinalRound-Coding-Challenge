@@ -10,6 +10,7 @@ YELLOW = (255, 255, 0)
 GREY = (146, 146, 146)
 WHITE = (255, 255, 255)
 SNOW = (255, 250, 250)
+BLACK = (0, 0, 0)
 PLAYER_COLOR_DICT = {
 	"RED": (255, 0, 0),
 	"GREEN": (0, 255, 0),
