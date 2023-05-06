@@ -33,6 +33,9 @@ class Player():
 		self.playerPortal = PortalClass.Portal(gameScreen, curCell)
 		self.appearFrame = 18
 
+	def DisplayInfo(self, gameScreen, infoCoord):
+		self.status.DisplayInfo(gameScreen, infoCoord);
+
 	def DisplayFrame(self):
 		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 

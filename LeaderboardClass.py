@@ -9,9 +9,18 @@ class LeaderboardInfo():
 		self.containerCoord = containerCoord
 		self.containerPadding = containerPadding
 		self.containerRect = pygame.Rect(self.containerCoord[0] + self.containerPadding, self.containerCoord[1] + self.containerPadding, self.containerSize[0] - self.containerPadding * 2, self.containerSize[1] - self.containerPadding * 2)
+		
+		# self.playerInfoCoord = [name, score, rank, rank_image]
+		rectPadding = 10
+		self.playerInfoCoord = (self.containerRect.left + rectPadding, self.containerRect.top + self.containerRect.height * 2 / 3 + rectPadding)
+		self.player = player
+
 
 	def Display(self):
-		pygame.draw.rect(self.gameScreen, Const.WHITE, self.containerRect)
+		pygame.draw.rect(self.gameScreen, Const.WHITE, self.containerRect, border_radius = 15)
+		
+		self.player.DisplayInfo(self.gameScreen, self.playerInfoCoord)
+
 
 class Leaderboard():
 	def __init__(self, playerList):
@@ -33,7 +42,7 @@ class Leaderboard():
 		self.playerContainerNum = len(self.playerList)
 
 		self.playerContainerSize = (self.screenWidth / 4, self.screenHeight - (self.leaderboardTextFont.size(self.leaderboardText)[1] + 100))
-		self.playerContainerPadding = self.playerContainerSize[0] / 8
+		self.playerContainerPadding = self.playerContainerSize[0] / 10
 
 		playerContainerInitCoord = ((self.screenWidth - self.playerContainerSize[0] * self.playerContainerNum) / 2, self.screenHeight - self.playerContainerSize[1])
 		self.playerContainer = []

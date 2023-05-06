@@ -40,4 +40,14 @@ class PlayerStatus():
 		self.playerScoreText = self.playerScoreFont.render('Score: ' + str(self.playerScore), True, Const.PLAYER_COLOR_DICT[self.playerColor])
 
 
+	def DisplayInfo(self, gameScreen, infoCoord):
+		infoFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 25)
 
+		infoName = infoFont.render("Name: " + self.playerName, True, Const.PLAYER_COLOR_DICT[self.playerColor])
+		gameScreen.blit(infoName, infoCoord)
+
+		infoScore = infoFont.render("Score: " + str(self.playerScore), True, Const.PLAYER_COLOR_DICT[self.playerColor])
+		gameScreen.blit(infoScore, (infoCoord[0], infoCoord[1] + 35))
+
+		infoRank = infoFont.render("Rank: " + "...", True, Const.PLAYER_COLOR_DICT[self.playerColor])
+		gameScreen.blit(infoRank, (infoCoord[0], infoCoord[1] + 70))
