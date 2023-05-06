@@ -39,6 +39,9 @@ class Player():
 	def GetIsMoving(self):
 		return self.isMoving or self.appearFrame > 0
 
+	def GetID(self):
+		return self.playerID
+
 	def MoveFrame(self):
 		if(self.appearFrame > 0):
 			self.playerPortal.MoveFrame()

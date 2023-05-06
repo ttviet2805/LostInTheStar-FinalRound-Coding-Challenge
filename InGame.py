@@ -28,7 +28,7 @@ def Run():
 
 	# Set up Clock
 	clock = pygame.time.Clock()
-	isEndGame = True
+	isEndGame = False
 
 	# Set up Player Status
 	statusWidth = (screenWidth - screenHeight) / 2;
@@ -69,14 +69,11 @@ def Run():
 							x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
 							y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
 							playerList.append(PlayerClass.Player(gameScreen, i, statusInfo, gameMap.GetCell(x, y)))
-						else:
-							playerList.append(None)
 				else:
-					for i in range(4):
-						if str(i) in Const.mapData[str(step)]["players"]:
-							x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
-							y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
-							playerList[i].ChangeCell((x, y))
+					for i in playerList:
+						x = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["x"]
+						y = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["y"]
+						i.ChangeCell((x, y))
 			else:
 				isEndGame = True
 

@@ -3,7 +3,7 @@ import Const
 import PlayerClass
 
 class LeaderboardInfo():
-	def __init__(self, gameScreen, containerSize, containerCoord, containerPadding):
+	def __init__(self, gameScreen, containerSize, containerCoord, containerPadding, player):
 		self.gameScreen = gameScreen
 		self.containerSize = containerSize
 		self.containerCoord = containerCoord
@@ -30,16 +30,16 @@ class Leaderboard():
 		self.leaderboardTextCoord = ((self.screenWidth - self.leaderboardTextFont.size(self.leaderboardText)[0]) / 2, 50)
 		self.leaderboardTextRender = self.leaderboardTextFont.render(self.leaderboardText, True, Const.WHITE)
 
-		self.playerContainerNum = 4
+		self.playerContainerNum = len(self.playerList)
 
-		self.playerContainerSize = (self.screenWidth / self.playerContainerNum, self.screenHeight - (self.leaderboardTextFont.size(self.leaderboardText)[1] + 100))
+		self.playerContainerSize = (self.screenWidth / 4, self.screenHeight - (self.leaderboardTextFont.size(self.leaderboardText)[1] + 100))
 		self.playerContainerPadding = self.playerContainerSize[0] / 8
 
-		playerContainerInitCoord = (0, self.screenHeight - self.playerContainerSize[1])
+		playerContainerInitCoord = ((self.screenWidth - self.playerContainerSize[0] * self.playerContainerNum) / 2, self.screenHeight - self.playerContainerSize[1])
 		self.playerContainer = []
 		for i in range(self.playerContainerNum):
 			playerContainerCoord = ((playerContainerInitCoord[0] + i * self.playerContainerSize[0], playerContainerInitCoord[1]))
-			self.playerContainer.append(LeaderboardInfo(self.gameScreen, self.playerContainerSize, playerContainerCoord, self.playerContainerPadding))
+			self.playerContainer.append(LeaderboardInfo(self.gameScreen, self.playerContainerSize, playerContainerCoord, self.playerContainerPadding, self.playerList[i]))
 
 	def Run(self):
 		while self.running:
