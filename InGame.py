@@ -81,6 +81,10 @@ def Run():
 			isNewStep = False
 			gameMap.UpdateMap(step)
 
+			for i in range(4):
+				curScore = gameMap.getScore(i)
+				playerStatusList[i].updateScore(curScore)
+
 		for i in playerStatusList:
 			i.displayStatusImage()
 

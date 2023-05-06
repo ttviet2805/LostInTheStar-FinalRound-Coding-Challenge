@@ -21,10 +21,9 @@ class PlayerStatus():
 		self.playerNameCoord = (self.statusCoord[0] + self.statusLen[0] * 2 / 10, self.statusCoord[1] + self.statusLen[1] * 7 / 10)
 
 		# Score
-		playerScoreFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 15)
-		self.playerScoreText = playerScoreFont.render('Score: ' + str(self.playerScore), True, Const.PLAYER_COLOR_DICT[playerColor])
+		self.playerScoreFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 15)
+		self.playerScoreText = self.playerScoreFont.render('Score: ' + str(self.playerScore), True, Const.PLAYER_COLOR_DICT[playerColor])
 		self.playerScoreCoord = (self.statusCoord[0] + self.statusLen[0] * 6 / 10, self.statusCoord[1] + self.statusLen[1] * 2 / 10)
-
 
 
 	def displayStatusImage(self):
@@ -36,7 +35,9 @@ class PlayerStatus():
 
 		self.gameScreen.blit(self.playerScoreText, self.playerScoreCoord)
 
-
+	def updateScore(self, curScore):
+		self.playerScore = curScore
+		self.playerScoreText = self.playerScoreFont.render('Score: ' + str(self.playerScore), True, Const.PLAYER_COLOR_DICT[self.playerColor])
 
 
 
