@@ -91,5 +91,3 @@ def Run():
 				i.MoveFrame()
 
 		pygame.display.update()
-
-Run()
