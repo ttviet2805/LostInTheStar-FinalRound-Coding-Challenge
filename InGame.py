@@ -4,6 +4,7 @@ import CellClass
 import PlayerClass
 import PlayerStatus
 import MapClass
+import LeaderboardClass
 
 def CheckMoving(playerList):
 	for i in playerList:
@@ -27,6 +28,7 @@ def Run():
 
 	# Set up Clock
 	clock = pygame.time.Clock()
+	isEndGame = False
 
 	# Set up Player Status
 	statusWidth = (screenWidth - screenHeight) / 2;
@@ -76,6 +78,13 @@ def Run():
 							x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
 							y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
 							playerList[i].ChangeCell((x, y))
+			else:
+				isEndGame = True
+
+		if isEndGame:
+			running = False
+			leaderboard = LeaderboardClass.Leaderboard(playerList)
+			leaderboard.Run()
 
 		if CheckMoving(playerList) == False and isNewStep:
 			isNewStep = False
