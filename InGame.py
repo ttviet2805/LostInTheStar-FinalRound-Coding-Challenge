@@ -34,10 +34,10 @@ def Run():
 	isEndGame = False
 
 	# Set up Player Status
-	statusWidth = (screenWidth - screenHeight) / 2;
-	statusHeight = screenHeight * 4 / 10
+	statusWidth = screenWidth * 120 / 610;
+	statusHeight = screenHeight * 80 / 406
 	statusSize = (statusWidth, statusHeight)
-	statusCoord = [(0, screenHeight / 10), (0, screenHeight / 2), (screenWidth - statusWidth, screenHeight / 10), (screenWidth - statusWidth, screenHeight / 2)]
+	statusCoord = [(0, 0), (screenWidth - statusWidth, 0), (0, screenHeight - statusWidth), (screenWidth - statusWidth, screenHeight - statusHeight)]
 	playerStatusList = []
 
 	statusInfo = (statusCoord, statusSize)
@@ -51,7 +51,7 @@ def Run():
 	mapWidth = mapHeight
 	mapCoordX = (screenWidth - mapWidth) / 2
 	mapCoordY = screenHeight * 133 / 406
-	print (mapWidth, mapHeight, mapCoordX, mapCoordY)
+	# print (mapWidth, mapHeight, mapCoordX, mapCoordY)
 	gameMap = MapClass.Map(gameScreen, mapWidth, mapHeight, mapCoordX, mapCoordY)
 	
 	# Set up player
