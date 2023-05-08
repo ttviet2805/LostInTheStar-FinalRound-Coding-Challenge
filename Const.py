@@ -20,6 +20,8 @@ PLAYER_COLOR_DICT = {
 MAP_COLOR = (127, 115, 82)
 BACKGROUND_COLOR = (92, 98, 108)
 
+GAME_BACKGROUND = pygame.image.load('Assets/Images/Background.png')
+
 
 CELL_LENGTH = 100
 CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(11)]

@@ -21,10 +21,12 @@ def Run():
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 	pygame.display.set_caption("BombIT")
 	pygame.display.flip()
-	gameScreen.fill(Const.BACKGROUND_COLOR)
 
 	screenWidth, screenHeight = pygame.display.get_surface().get_size()
+	gameBackground = pygame.transform.scale(Const.GAME_BACKGROUND, (screenWidth, screenHeight))
 	print(screenWidth, screenHeight)
+	gameScreen.blit(gameBackground, (0, 0))
+
 	running = True
 
 	# Set up Clock
@@ -45,7 +47,12 @@ def Run():
 	isNewStep = False
 
 	# Set up Map
-	gameMap = MapClass.Map(gameScreen, screenHeight, statusWidth)
+	mapHeight = screenHeight * 212/ 406
+	mapWidth = mapHeight
+	mapCoordX = (screenWidth - mapWidth) / 2
+	mapCoordY = screenHeight * 133 / 406
+	print (mapWidth, mapHeight, mapCoordX, mapCoordY)
+	gameMap = MapClass.Map(gameScreen, mapWidth, mapHeight, mapCoordX, mapCoordY)
 	
 	# Set up player
 	playerList = []
@@ -75,7 +82,7 @@ def Run():
 						x = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["x"]
 						y = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["y"]
 						i.ChangeCell((x, y))
-				isEndGame = True
+				isEndGame = False
 			else:
 				isEndGame = True
 
