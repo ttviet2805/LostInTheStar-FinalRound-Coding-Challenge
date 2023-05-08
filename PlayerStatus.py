@@ -2,21 +2,22 @@ import Const
 import pygame
 
 class PlayerStatus():
-	def __init__(self, gameScreen, playerName, playerColor, statusCoord, statusLen):
+	def __init__(self, gameScreen, ID, playerName, playerColor, statusCoord, statusLen):
 		self.gameScreen = gameScreen
 		self.playerName = playerName
 		self.playerColor = playerColor
 		self.statusCoord = statusCoord
 		self.statusLen = statusLen
+		self.playerID = ID
 		self.playerScore = 0
 		self.statusBackground = pygame.transform.scale(Const.STATUS_BACKGROUND, statusLen)
 		
 		# Skin
-		self.playerSkin = pygame.transform.scale(Const.PLAYER_IMAGE, (statusLen[0] * 5 / 10, statusLen[1] * 6 / 10))
-		self.skinCoord = (self.statusCoord[0] + self.statusLen[0] / 10, self.statusCoord[1] + self.statusLen[1] * 1 / 10)
+		self.playerSkin = pygame.transform.scale(Const.PLAYER_IMAGE[self.playerID], (statusLen[0] * 4 / 10, statusLen[1] * 5 / 10))
+		self.skinCoord = (self.statusCoord[0] + self.statusLen[0] * 2 / 10, self.statusCoord[1] + self.statusLen[1] * 2 / 10)
 		
 		# Player Name
-		playerNameFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 40)
+		playerNameFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 35)
 		self.playerNameText = playerNameFont.render(playerName, True, Const.PLAYER_COLOR_DICT[playerColor])
 		self.playerNameCoord = (self.statusCoord[0] + self.statusLen[0] * 2 / 10, self.statusCoord[1] + self.statusLen[1] * 7 / 10)
 
@@ -40,6 +41,6 @@ class PlayerStatus():
 		self.playerScoreText = self.playerScoreFont.render('Score: ' + str(self.playerScore), True, Const.PLAYER_COLOR_DICT[self.playerColor])
 
 	def GetInfo(self):
-		return (self.playerName, self.playerScore, self.playerColor)
+		return (self.playerName, self.playerScore, self.playerColor, self.playerSkin)
 
 	

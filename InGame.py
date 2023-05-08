@@ -75,7 +75,7 @@ def Run():
 						x = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["x"]
 						y = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["y"]
 						i.ChangeCell((x, y))
-				# isEndGame = True
+				isEndGame = True
 			else:
 				isEndGame = True
 

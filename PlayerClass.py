@@ -8,7 +8,7 @@ class Player():
 	def __init__(self, gameScreen, ID, statusInfo, curCell):
 		# Status
 		self.playerID = ID
-		self.status = PlayerStatus.PlayerStatus(gameScreen, "Viet" + str(ID), Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
+		self.status = PlayerStatus.PlayerStatus(gameScreen, ID, "Viet" + str(ID), Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
 
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
@@ -20,7 +20,8 @@ class Player():
 		self.playerFrame = []
 		for listFrame in Const.PLAYER_FRAME_LIST:
 			playerFrameList = []
-			for frame in listFrame:
+			for i in range(self.playerID, self.playerID + 1):
+				frame = listFrame[i]
 				playerFrameList.append(pygame.transform.scale(frame, (self.playerFrameWidth, self.playerFrameHeight)))
 			self.playerFrame.append(playerFrameList)
 
