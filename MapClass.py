@@ -80,17 +80,17 @@ class Map():
 							newColor = 4
 						self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen, newColor)
 					else:
-						newColor = 0
+						newColor = 5
 						if newMapList[i][j] == "a":
-							newColor = 1
+							newColor = 6
 						elif newMapList[i][j] == "b":
-							newColor = 2
+							newColor = 7
 						elif newMapList[i][j] == "c":
-							newColor = 3
+							newColor = 8
 						elif newMapList[i][j] == "d":
-							newColor = 4
+							newColor = 9
 						self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLen + self.mapInitCoord, i * self.cellLen), (i, j), self.cellLen, newColor)
-						self.mapImage[i][j].LockCell()
+						# self.mapImage[i][j].LockCell()
 		self.mapList = newMapList
 
 	def GetCell(self, row, col):

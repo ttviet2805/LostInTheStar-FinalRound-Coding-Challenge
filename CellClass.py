@@ -33,7 +33,7 @@ class ObstacleCell(Cell):
 
 		self.gameScreen = gameScreen
 		self.backgroundImage = [
-			pygame.transform.scale(Const.CELL_IMAGE_LIST[5], (cellLen, cellLen))
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[10], (cellLen, cellLen))
 		]
 
 	def DisplayBackgroundImage(self):
@@ -47,21 +47,16 @@ class EmptyCell(Cell):
 		self.cellColor = cellColor
 		self.isLocked = False
 		self.backgroundImage = [
-			pygame.transform.scale(Const.CELL_IMAGE_LIST[0], (cellLen, cellLen)),
-			pygame.transform.scale(Const.CELL_IMAGE_LIST[1], (cellLen, cellLen)),
-			pygame.transform.scale(Const.CELL_IMAGE_LIST[2], (cellLen, cellLen)),
-			pygame.transform.scale(Const.CELL_IMAGE_LIST[3], (cellLen, cellLen)),
-			pygame.transform.scale(Const.CELL_IMAGE_LIST[4], (cellLen, cellLen)),
-			pygame.transform.scale(Const.CELL_IMAGE_LIST[6], (cellLen, cellLen))
+			pygame.transform.scale(Const.CELL_IMAGE_LIST[i], (cellLen, cellLen)) for i in range(10)
 		]
 
 	def DisplayBackgroundImage(self):
 		self.gameScreen.blit(self.backgroundImage[self.cellColor], self.cellCoord)
-		if self.isLocked:
-			self.gameScreen.blit(self.backgroundImage[5], self.cellCoord)
+		# if self.isLocked:
+		# 	self.gameScreen.blit(self.backgroundImage[5], self.cellCoord)
 
 	def ChangeCellColor(self, newColor):
 		self.cellColor = newColor
 
 	def LockCell(self):
-		self.isLocked = True
+		self.cellColor = 5
