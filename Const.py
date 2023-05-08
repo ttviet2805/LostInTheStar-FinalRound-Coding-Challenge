@@ -21,8 +21,6 @@ MAP_COLOR = (127, 115, 82)
 BACKGROUND_COLOR = (92, 98, 108)
 
 
-
-
 CELL_LENGTH = 100
 CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(11)]
 CELL_MOVE = [(-1, 0), (0, 1), (1, 0), (0, -1)]
@@ -38,6 +36,10 @@ PORTAL_FRAME_LIST = [pygame.image.load(f'Assets/Images/Portal/portal-{i}.png') f
 STATUS_BACKGROUND = pygame.image.load('Assets/Images/Status/Status.png')
 PLAYER_IMAGE = [
 	pygame.image.load(f'Assets/Images/Player/ava{i}.png') for i in range(4)
+]
+
+RANK_CUP = [
+	pygame.image.load(f'Assets/Images/Player/rank{i}.png') for i in range(1, 5)
 ]
 
 # Map file

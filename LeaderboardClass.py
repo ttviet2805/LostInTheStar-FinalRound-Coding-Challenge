@@ -14,10 +14,11 @@ class LeaderboardInfo():
 		self.rectPadding = 10
 		self.rectContent = (self.containerRect.left + self.rectPadding, self.containerRect.top + self.rectPadding, self.containerRect.width - 2 * self.rectPadding, self.containerRect.height - 2 * self.rectPadding)
 		
-		self.playerInfoCoord = (self.rectContent[0], self.containerRect[1] + self.rectContent[3] * 13 / 20)
+		self.playerInfoCoord = (self.rectContent[0], self.containerRect[1] + self.rectContent[3] * 6 / 10)
 		self.player = player
 		self.playerInfo = self.player.GetInfo()
 		self.playerRank = rank
+		self.playerCup = pygame.transform.scale(Const.RANK_CUP[self.playerRank - 1], (50, 50))
 
 	def Display(self):
 		pygame.draw.rect(self.gameScreen, Const.BACKGROUND_COLOR, self.containerRect, border_radius = 15)
@@ -37,6 +38,8 @@ class LeaderboardInfo():
 		infoRank = infoFont.render("Rank: " + str(self.playerRank), True, Const.PLAYER_COLOR_DICT[self.playerInfo[2]])
 		infoRankWidth = infoFont.size("Rank: " + str(self.playerRank))[0]
 		self.gameScreen.blit(infoRank, (self.playerInfoCoord[0] + (self.rectContent[2] - infoRankWidth) / 2, self.playerInfoCoord[1] + 70))
+
+		self.gameScreen.blit(self.playerCup, (self.rectContent[0] + (self.rectContent[2] - self.playerCup.get_width()) / 2, self.playerInfoCoord[1] + 120))
 
 
 class Leaderboard():
