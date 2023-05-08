@@ -17,10 +17,14 @@ PLAYER_COLOR_DICT = {
 	"BLUE": (0, 0, 255),
 	"YELLOW": (255, 255, 0)
 }
+MAP_COLOR = (127, 115, 82)
+BACKGROUND_COLOR = (92, 98, 108)
+
+
 
 
 CELL_LENGTH = 100
-CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(8)]
+CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(9)]
 CELL_MOVE = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 PLAYER_FRAME_LIST = [
 	[pygame.image.load(f'Assets/Images/Player/Up{i}.png') for i in range(6)],

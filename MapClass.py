@@ -32,6 +32,9 @@ class Map():
 		self.cellLen = self.mapSize // self.N
 		self.mapInitCoord = mapInitCoord + (self.mapSize - self.cellLen * self.N) / 2
 
+		# Draw background
+		pygame.draw.rect(self.gameScreen, Const.MAP_COLOR, pygame.Rect(mapInitCoord, 0, self.mapSize, self.mapSize))
+
 		# Create List Cell in Map
 		for i in range(0, self.M):
 			mapImageRow = []

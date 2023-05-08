@@ -21,6 +21,7 @@ def Run():
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 	pygame.display.set_caption("BombIT")
 	pygame.display.flip()
+	gameScreen.fill(Const.BACKGROUND_COLOR)
 
 	screenWidth, screenHeight = pygame.display.get_surface().get_size()
 	print(screenWidth, screenHeight)
