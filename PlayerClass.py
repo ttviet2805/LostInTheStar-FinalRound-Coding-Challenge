@@ -21,16 +21,17 @@ class Player():
 		self.playerFrame = []
 		for listFrame in Const.PLAYER_FRAME_LIST:
 			playerFrameList = []
-			for i in range(self.playerID, self.playerID + 1):
+			for i in range(self.playerID * 12, self.playerID * 12 + 12):
 				frame = listFrame[i]
 				playerFrameList.append(pygame.transform.scale(frame, (self.playerFrameWidth, self.playerFrameHeight)))
 			self.playerFrame.append(playerFrameList)
 
 		self.moveDirection = 2
+		self.animationDirection = 1
 		self.curFrame = 0
-		self.numFrame = len(self.playerFrame[self.moveDirection])
+		self.numFrame = len(self.playerFrame[self.animationDirection])
 		self.isMoving = False
-		self.moveSpeed = 8
+		self.moveSpeed = 10
 
 		self.playerPortal = PortalClass.Portal(gameScreen, curCell)
 		self.appearFrame = 18
@@ -39,7 +40,7 @@ class Player():
 		return self.status.GetInfo()
 
 	def DisplayFrame(self):
-		self.gameScreen.blit(self.playerFrame[self.moveDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
+		self.gameScreen.blit(self.playerFrame[self.animationDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
 	def GetIsMoving(self):
 		return self.isMoving or self.appearFrame > 0
@@ -79,8 +80,10 @@ class Player():
 			return
 		if self.moveDirection != newDirection:
 			self.moveDirection = newDirection
+		if (newDirection == 1 or newDirection == 3) and self.animationDirection != newDirection // 2:
+			self.animationDirection = newDirection // 2
 			self.curFrame = 0
-			self.numFrame = len(self.playerFrame[self.moveDirection])
+			self.numFrame = len(self.playerFrame[self.animationDirection])
 
 		if self.playerCell.GetAdj(self.moveDirection) != None:
 			self.isMoving = True
