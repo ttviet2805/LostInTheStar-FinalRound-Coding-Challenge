@@ -60,6 +60,7 @@ def Run():
 
 	# Game Running
 	while running :
+		gameScreen.blit(gameBackground, (0, 0))
 		clock.tick(10)
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
