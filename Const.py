@@ -1,6 +1,8 @@
 import pygame
 import json
 
+MSI = (1536, 864)
+
 # Player
 PLAYER_COLOR = ["RED", "GREEN", "BLUE", "YELLOW"]
 RED = (255, 0, 0)
