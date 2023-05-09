@@ -99,7 +99,7 @@ def Run():
 			cnt = 0
 			for i in playerList:
 				if i != None:
-					curScore = gameMap.getScore(cnt)
+					curScore = gameMap.getScore(step, cnt)
 					i.updateScore(curScore)		
 					cnt += 1	
 

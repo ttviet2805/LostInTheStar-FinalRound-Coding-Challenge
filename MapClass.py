@@ -99,24 +99,5 @@ class Map():
 	def GetCell(self, row, col):
 		return self.mapImage[row % self.N][col % self.N]
 
-	def getScore(self, ID):
-		X = 0
-		Y = 0
-		
-		if ID == 0:
-			X, Y = 'a', 'A'
-		if ID == 1:
-			X, Y = 'b', 'B'
-		if ID == 2:
-			X, Y = 'c', 'C'
-		if ID == 3:
-			X, Y = 'd', 'D'
-
-		curScore = 0
-
-		for i in range(self.M):
-			for j in range(self.N):
-				if self.mapList[i][j] == X or self.mapList[i][j] == Y:
-					curScore += 1
-
-		return curScore
+	def getScore(self, step, ID):
+		return Const.mapData[str(step)]["players"][str(ID)]['area']
