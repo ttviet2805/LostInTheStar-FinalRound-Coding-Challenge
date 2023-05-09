@@ -15,7 +15,8 @@ class Player():
 		self.playerCoord = self.playerCell.GetCenter()
 		self.playerFrameHeight = self.playerCell.GetLen() / 6 * 7
 		self.playerFrameWidth = self.playerFrameHeight / 7 * 5
-		self.playerPadding = ((self.playerCell.GetLen() - self.playerFrameWidth) / 2, (self.playerCell.GetLen() - self.playerFrameHeight) * 2) 
+		# self.playerPadding = ((self.playerCell.GetLen() - self.playerFrameWidth) / 2, (self.playerCell.GetLen() - self.playerFrameHeight) * 2) 
+		self.playerPadding = ((self.playerCell.GetLen() - self.playerFrameWidth) / 2 + self.playerCell.GetLen() / 15, (- self.playerFrameHeight) / 2) 
 
 		self.playerFrame = []
 		for listFrame in Const.PLAYER_FRAME_LIST:

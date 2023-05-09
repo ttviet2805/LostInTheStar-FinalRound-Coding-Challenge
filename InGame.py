@@ -18,6 +18,7 @@ def Run():
 	pygame.init()
 
 	# Set up Game Window
+	# gameScreen = pygame.display.set_mode((1280, 720))
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 	pygame.display.set_caption("BombIT")
 	pygame.display.flip()
