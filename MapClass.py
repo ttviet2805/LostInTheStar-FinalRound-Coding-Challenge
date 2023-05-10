@@ -101,3 +101,6 @@ class Map():
 
 	def getScore(self, step, ID):
 		return Const.mapData[str(step)]["players"][str(ID)]['area']
+
+	def getAlive(self, step, ID):
+		return Const.mapData[str(step)]["players"][str(ID)]['alive']

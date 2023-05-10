@@ -100,6 +100,8 @@ def Run():
 				if i != None:
 					curScore = gameMap.getScore(step, cnt)
 					i.updateScore(curScore)		
+					isAlive = gameMap.getAlive(step, cnt)
+					i.updateAlive(isAlive)
 					cnt += 1	
 
 		gameMap.DisplayMap()
