@@ -64,5 +64,10 @@ TICK_IMAGE = [
 	pygame.image.load('Assets/Images/Menu/checkbox-unchecked.png'),
 	pygame.image.load('Assets/Images/Menu/checkbox-checked.png')
 ]
+MAP_SIZE_IMAGE = pygame.image.load('Assets/Images/Menu/dropdown.png')
+UP_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/up.png')
+DOWN_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/down.png')
+
+
 
 
