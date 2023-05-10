@@ -1,3 +1,5 @@
-import InGame
+import MenuClass
 
-InGame.Run()
+menuGame = MenuClass.Menu()
+
+menuGame.Run()

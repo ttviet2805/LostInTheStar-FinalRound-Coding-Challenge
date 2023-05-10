@@ -22,7 +22,7 @@ PLAYER_COLOR_DICT = {
 MAP_COLOR = (127, 115, 82)
 BACKGROUND_COLOR = (92, 98, 108)
 
-GAME_BACKGROUND = pygame.image.load('Assets/Images/Background.png')
+GAME_BACKGROUND = pygame.image.load('Assets/Images/Background/Game-Background.png')
 
 PLAYER_AVA = [pygame.image.load(f'Assets/Images/Status/Avatar_{i}.png') for i in range(1, 5)]
 
@@ -51,3 +51,9 @@ RANK_CUP = [
 # Map file
 mapFile = open("Assets/Example.json")
 mapData = json.load(mapFile)
+
+
+# Menu
+MENU_BACKGROUND = pygame.image.load('Assets/Images/Background/Menu-Background.png')
+LOST_STAR_IMAGE = pygame.image.load('Assets/Images/Menu/title.png')
+START_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/start-button.png')
