@@ -146,7 +146,7 @@ class Menu():
 				InGame.Run()
 
 			upState = self.upButton.isClicked(self.gameScreen)
-			if upState == True and self.mapSize < 20:
+			if upState == True and self.mapSize < 21:
 				self.mapSize += 1
 				mapNumCellStr = "MAP " + str(self.mapSize - 10) + " (" + str(self.mapSize) + "x" + str(self.mapSize) + ")"
 				self.mapNumCellText = self.mapNumCellFont.render(mapNumCellStr, True, Const.WHITE)
