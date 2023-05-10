@@ -57,3 +57,12 @@ mapData = json.load(mapFile)
 MENU_BACKGROUND = pygame.image.load('Assets/Images/Background/Menu-Background.png')
 LOST_STAR_IMAGE = pygame.image.load('Assets/Images/Menu/title.png')
 START_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/start-button.png')
+TWO_PLAYER_IMAGE = pygame.image.load('Assets/Images/Menu/2player-button.png')
+FOUR_PLAYER_IMAGE = pygame.image.load('Assets/Images/Menu/4player-button.png')
+CHOOSE_IMAGE = pygame.image.load('Assets/Images/Menu/choose.png')
+TICK_IMAGE = [
+	pygame.image.load('Assets/Images/Menu/checkbox-unchecked.png'),
+	pygame.image.load('Assets/Images/Menu/checkbox-checked.png')
+]
+
+
