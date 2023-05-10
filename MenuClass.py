@@ -64,10 +64,10 @@ class Menu():
 		self.tickSize = (self.chooseSize[1] * 99 / 100, self.chooseSize[1] * 99 / 100)
 		self.tickImage = [pygame.transform.scale(Const.TICK_IMAGE[i], self.tickSize) for i in range(2)]
 		self.tickCoord = [
-			(self.twoPlayerCoord[0], self.twoPlayerCoord[1] + self.twoPlayerSize[1] + self.screenHeight * 1 / 50),
-			(self.fourPlayerCoord[0], self.fourPlayerCoord[1] + self.fourPlayerSize[1] + self.screenHeight * 1 / 50),
-			(self.twoPlayerCoord[0], self.twoPlayerCoord[1] + self.twoPlayerSize[1] + self.tickSize[0] + self.screenHeight * 1 / 50 + self.screenHeight * 1 / 100),
-			(self.fourPlayerCoord[0], self.fourPlayerCoord[1] + self.fourPlayerSize[1] + self.tickSize[0] + self.screenHeight * 1 / 50 + self.screenHeight * 1 / 100)
+			(self.twoPlayerCoord[0] + self.tickSize[0] * 1 / 5, self.twoPlayerCoord[1] + self.twoPlayerSize[1] + self.screenHeight * 1 / 50),
+			(self.fourPlayerCoord[0] + self.tickSize[0] * 1 / 5, self.fourPlayerCoord[1] + self.fourPlayerSize[1] + self.screenHeight * 1 / 50),
+			(self.twoPlayerCoord[0] + self.tickSize[0] * 1 / 5, self.twoPlayerCoord[1] + self.twoPlayerSize[1] + self.tickSize[0] + self.screenHeight * 1 / 50 + self.screenHeight * 1 / 100),
+			(self.fourPlayerCoord[0] + self.tickSize[0] * 1 / 5, self.fourPlayerCoord[1] + self.fourPlayerSize[1] + self.tickSize[0] + self.screenHeight * 1 / 50 + self.screenHeight * 1 / 100)
 		]
 		self.tickButton = [[ButtonClass.Button(self.tickImage[j], self.tickCoord[i]) for j in range(2)] for i in range(4)]
 
@@ -76,7 +76,7 @@ class Menu():
 		self.teamText = [self.teamTextFont.render("Team " + str(i), True, Const.WHITE) for i in range(4)]
 		teamHeight = self.teamTextFont.size("Team 1")[1]
 		teamWidth = self.teamTextFont.size("Team 1")[0]
-		self.teamCoord = [(self.tickCoord[i][0] + self.screenWidth * 1 / 100 + self.tickSize[0], self.tickCoord[i][1] + (self.tickSize[1] - teamHeight) / 2) for i in range(4)]
+		self.teamCoord = [(self.tickCoord[i][0] + self.screenWidth * 1 / 200 + self.tickSize[0], self.tickCoord[i][1] + (self.tickSize[1] - teamHeight) / 2) for i in range(4)]
 
 		# Prepare Data For Ingame
 		self.mode = 0
