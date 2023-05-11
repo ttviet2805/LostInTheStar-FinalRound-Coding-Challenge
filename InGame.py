@@ -37,7 +37,7 @@ def Run():
 	statusWidth = screenWidth * 120 / 610;
 	statusHeight = screenHeight * 80 / 406
 	statusSize = (statusWidth, statusHeight)
-	statusCoord = [(0, 0), (screenWidth - statusWidth, 0), (0, screenHeight - statusWidth), (screenWidth - statusWidth, screenHeight - statusHeight)]
+	statusCoord = [(0, 0), (screenWidth - statusWidth, 0), (0, screenHeight - statusHeight), (screenWidth - statusWidth, screenHeight - statusHeight)]
 	playerStatusList = []
 
 	statusInfo = (statusCoord, statusSize)

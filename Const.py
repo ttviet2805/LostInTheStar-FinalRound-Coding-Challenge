@@ -51,7 +51,7 @@ PLAYER_IMAGE = [
 ]
 
 # Map file
-mapFile = open("Assets/Example.json")
+mapFile = open("Assets/TripleChickens_Robotraicay_henmarte_A.K.M.json")
 mapData = json.load(mapFile)
 MAP_NORM = '.'
 MAP_OBS = '#'

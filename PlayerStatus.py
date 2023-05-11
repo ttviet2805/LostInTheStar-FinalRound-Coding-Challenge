@@ -4,6 +4,7 @@ import pygame
 class PlayerStatus():
 	def __init__(self, gameScreen, ID, isAlive, playerName, playerColor, statusCoord, statusLen):
 		self.gameScreen = gameScreen
+		self.screenWidth, self.screenHeight = pygame.display.get_surface().get_size()
 		self.playerName = playerName
 		self.playerColor = playerColor
 		self.statusCoord = statusCoord
@@ -23,7 +24,7 @@ class PlayerStatus():
 			self.skinCoord = (self.statusCoord[0] + self.statusLen[0] - self.statusLen[0] * 1/ 10 - avaLen, self.statusCoord[1] + (self.statusLen[1] - avaLen) / 2)
 
 		# Player Name
-		playerNameFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 35)
+		playerNameFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 25 * self.screenWidth // Const.DELL[0])
 		self.playerNameText = playerNameFont.render(playerName, True, Const.PLAYER_COLOR_DICT[playerColor])
 		playerNameHeight = playerNameFont.size(playerName)[1]
 		playerNameWidth = playerNameFont.size(playerName)[0]
@@ -33,14 +34,14 @@ class PlayerStatus():
 			self.playerNameCoord = (self.skinCoord[0] - playerNameWidth - statusLen[0] * 1 / 30, self.skinCoord[1] + (avaLen - playerNameHeight) / 2)
 
 		# Score
-		self.playerScoreFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 35)
+		self.playerScoreFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 35 * self.screenWidth // Const.DELL[0])
 		self.playerScoreText = self.playerScoreFont.render(str(self.playerScore), True, Const.PLAYER_COLOR_DICT[playerColor])
 		scoreHeight = self.playerScoreFont.size(str(self.playerScore))[1]
 		scoreWidth = self.playerScoreFont.size(str(self.playerScore))[0]
 		self.playerScoreCoord = (self.skinCoord[0] + (avaLen - scoreWidth) / 2, self.skinCoord[1] + avaLen + statusLen[1] * 1 / 30)
 
 		if ID > 1:
-			self.playerScoreCoord = (self.skinCoord[0] + (avaLen - scoreWidth) / 2, self.skinCoord[1] - statusLen[1] * 1 / 30)
+			self.playerScoreCoord = (self.skinCoord[0] + (avaLen - scoreWidth) / 2, self.skinCoord[1] - scoreHeight - statusLen[1] * 1 / 30)
 
 	def displayStatusImage(self):
 		if self.isAlive == True:
