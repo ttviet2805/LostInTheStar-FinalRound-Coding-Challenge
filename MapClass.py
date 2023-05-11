@@ -68,32 +68,31 @@ class Map():
 
 		for i in range(self.M):
 			for j in range(self.N):
-				if newMapList[i][j] != self.mapList[i][j]:
-					if newMapList[i][j] == '#':
-						self.mapImage[i][j].LockCell()
-					elif newMapList[i][j].isupper():
-						newColor = 0
-						if newMapList[i][j] == "A":
-							newColor = 1
-						elif newMapList[i][j] == "B":
-							newColor = 2
-						elif newMapList[i][j] == "C":
-							newColor = 3
-						elif newMapList[i][j] == "D":
-							newColor = 4
-						self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLenX + self.mapCoordX, i * self.cellLenX + self.mapCoordY), (i, j), self.cellLen, newColor)
-					else:
-						newColor = 5
-						if newMapList[i][j] == "a":
-							newColor = 6
-						elif newMapList[i][j] == "b":
-							newColor = 7
-						elif newMapList[i][j] == "c":
-							newColor = 8
-						elif newMapList[i][j] == "d":
-							newColor = 9
-						self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLenX + self.mapCoordX, i * self.cellLenX + self.mapCoordY), (i, j), self.cellLen, newColor)
-						# self.mapImage[i][j].LockCell()
+				if newMapList[i][j] == Const.MAP_OZ:
+					self.mapImage[i][j].LockCell()
+				elif newMapList[i][j].isupper():
+					newColor = 0
+					if newMapList[i][j] == "A":
+						newColor = 1
+					elif newMapList[i][j] == "B":
+						newColor = 2
+					elif newMapList[i][j] == "C":
+						newColor = 3
+					elif newMapList[i][j] == "D":
+						newColor = 4
+					self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLenX + self.mapCoordX, i * self.cellLenX + self.mapCoordY), (i, j), self.cellLen, newColor)
+				elif newMapList[i][j].islower():
+					newColor = 5
+					if newMapList[i][j] == "a":
+						newColor = 6
+					elif newMapList[i][j] == "b":
+						newColor = 7
+					elif newMapList[i][j] == "c":
+						newColor = 8
+					elif newMapList[i][j] == "d":
+						newColor = 9
+					self.mapImage[i][j] = CellClass.EmptyCell(self.gameScreen, (j * self.cellLenX + self.mapCoordX, i * self.cellLenX + self.mapCoordY), (i, j), self.cellLen, newColor)
+					# self.mapImage[i][j].LockCell()
 		self.mapList = newMapList
 
 	def GetCell(self, row, col):

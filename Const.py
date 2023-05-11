@@ -28,7 +28,7 @@ PLAYER_AVA = [pygame.image.load(f'Assets/Images/Status/Avatar_{i}.png') for i in
 PLAYER_AVA_DEAD = [pygame.image.load(f'Assets/Images/Status/deadAvatar_{i}.png') for i in range(1, 5)]
 
 CELL_LENGTH = 100
-CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(11)]
+CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(12)]
 CELL_MOVE = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 PLAYER_FRAME_LIST = [
 	[pygame.image.load(f'Assets/Images/Player/player{i}-left-{j}.png') for i in range(1, 5) for j in range(12)],
@@ -50,7 +50,9 @@ RANK_CUP = [
 # Map file
 mapFile = open("Assets/Example.json")
 mapData = json.load(mapFile)
-
+MAP_NORM = '.'
+MAP_OBS = '#'
+MAP_OZ = '#'
 
 # Menu
 MENU_BACKGROUND = pygame.image.load('Assets/Images/Background/Menu-Background.png')
