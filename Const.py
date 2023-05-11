@@ -1,6 +1,8 @@
 import pygame
 import json
 
+pygame.mixer.init()
+
 MSI = (1536, 864)
 
 # Player
@@ -76,6 +78,6 @@ MAP_SIZE_IMAGE = pygame.image.load('Assets/Images/Menu/dropdown.png')
 UP_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/up.png')
 DOWN_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/down.png')
 
-
-
-
+# Sound
+PLAYER_APPEAR_SOUND = pygame.mixer.Sound("Assets/Sounds/player_appear.mp3")
+PLAYER_DIE_SOUND = pygame.mixer.Sound("Assets/Sounds/player_die.mp3")

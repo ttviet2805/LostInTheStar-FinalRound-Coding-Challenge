@@ -53,6 +53,7 @@ class Player():
 
 	def MoveFrame(self):
 		if(self.appearFrame > 0):
+			pygame.mixer.Sound.play(Const.PLAYER_APPEAR_SOUND)
 			self.playerPortal.MoveFrame()
 			self.appearFrame -= 1
 			return
@@ -121,7 +122,8 @@ class Player():
 		self.status.updateScore(curScore)
 
 	def updateAlive(self, isAlive):
+		if self.isAlive == True and isAlive == False:
+			pygame.mixer.Sound.play(Const.PLAYER_DIE_SOUND)
+			self.ChangeAnimation(2)
 		self.isAlive = isAlive
 		self.status.updateAlive(isAlive)
-		if self.isAlive == False:
-			self.ChangeAnimation(2)
