@@ -15,67 +15,68 @@ class LeaderboardInfo():
 		self.rectPadding = 10
 		self.rectContent = (self.containerRect.left + self.rectPadding, self.containerRect.top + self.rectPadding, self.containerRect.width - 2 * self.rectPadding, self.containerRect.height - 2 * self.rectPadding)
 		
-		self.playerInfoCoord = (self.rectContent[0], self.containerRect[1] + self.rectContent[3] * 6 / 10)
 		self.player = player
 		self.playerInfo = self.player.GetInfo()
+
+		# Font
+		self.scoreFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 65 * self.screenWidth // Const.MSI[0])
+		self.nameFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 55 * self.screenWidth // Const.MSI[0])
+
+		# Player Ava
+		self.playerAvaSize = (self.containerRect[1] * 4 / 5, self.containerRect[1] * 4 / 5)
+		self.playerAva = pygame.transform.scale(self.playerInfo[3], self.playerAvaSize)
+		self.playerAvaCoord = (self.rectContent[0] + (self.rectContent[2] - self.playerAvaSize[0]) / 2, self.rectContent[1] + (self.rectContent[3] - self.playerAvaSize[1]) / 2)
+
+		# Player Cup
 		self.playerRank = rank
-		self.playerCup = pygame.transform.scale(Const.RANK_CUP[self.playerRank - 1], (60 * self.screenHeight / Const.MSI[1], 60 * self.screenHeight / Const.MSI[1]))
+		self.playerCup = pygame.transform.scale(Const.RANK_CUP[self.playerRank - 1], (50 * self.screenHeight / Const.MSI[1], 80 * self.screenHeight / Const.MSI[1]))
 
 	def Display(self):
-		pygame.draw.rect(self.gameScreen, Const.BACKGROUND_COLOR, self.containerRect, border_radius = 15)
+		pygame.draw.rect(self.gameScreen, Const.WHITE, self.containerRect, border_radius = 15)
 		
-		infoFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 25 * self.screenWidth // Const.MSI[0])
+		self.gameScreen.blit(self.playerAva, self.playerAvaCoord)
 
-		self.gameScreen.blit(self.playerInfo[3], (self.rectContent[0] + (self.rectContent[2] - self.playerInfo[3].get_width()) / 2, self.rectContent[1] + self.rectContent[3] / 10))
+		# Name
+		nameText = self.nameFont.render(self.playerInfo[0], True, Const.BLACK)
+		nameWidth = self.nameFont.size(self.playerInfo[0])[0]
+		nameHeight = self.nameFont.size(self.playerInfo[0])[1]
+		self.gameScreen.blit(nameText, (self.rectContent[0] + (self.rectContent[2] - nameWidth) / 2, self.rectContent[1] + (self.playerAvaCoord[1] - self.rectContent[1] - nameHeight) / 2))
 
-		infoName = infoFont.render("Name: " + self.playerInfo[0], True, Const.PLAYER_COLOR_DICT[self.playerInfo[2]])
-		infoNameWidth = infoFont.size("Name: " + self.playerInfo[0])[0]
-		self.gameScreen.blit(infoName, (self.playerInfoCoord[0] + (self.rectContent[2] - infoNameWidth) / 2, self.playerInfoCoord[1]))
+		# Score
+		scoreText = self.scoreFont.render(str(self.playerInfo[1]), True, Const.BLACK)
+		scoreWidth = self.scoreFont.size(str(self.playerInfo[1]))[0]
+		scoreHeight = self.scoreFont.size(str(self.playerInfo[1]))[1]
+		self.gameScreen.blit(scoreText, (self.rectContent[0] + (self.rectContent[2] - scoreWidth) / 2, self.playerAvaCoord[1] + self.playerAvaSize[1] + (self.rectContent[1] + self.rectContent[3] - self.playerAvaCoord[1] - self.playerAvaSize[1]  - nameHeight) / 2))
 
-		infoScore = infoFont.render("Score: " + str(self.playerInfo[1]), True, Const.PLAYER_COLOR_DICT[self.playerInfo[2]])
-		infoScoreWidth = infoFont.size("Score: " + str(self.playerInfo[1]))[0]
-		self.gameScreen.blit(infoScore, (self.playerInfoCoord[0] + (self.rectContent[2] - infoScoreWidth) / 2, self.playerInfoCoord[1] + 35 * self.screenWidth // Const.MSI[0]))
-
-		infoRank = infoFont.render("Rank: " + str(self.playerRank), True, Const.PLAYER_COLOR_DICT[self.playerInfo[2]])
-		infoRankWidth = infoFont.size("Rank: " + str(self.playerRank))[0]
-		self.gameScreen.blit(infoRank, (self.playerInfoCoord[0] + (self.rectContent[2] - infoRankWidth) / 2, self.playerInfoCoord[1] + 70 * self.screenWidth // Const.MSI[0]))
-
-		self.gameScreen.blit(self.playerCup, (self.rectContent[0] + (self.rectContent[2] - self.playerCup.get_width()) / 2, self.playerInfoCoord[1] + 120 * self.screenWidth // Const.MSI[0]))
+		self.gameScreen.blit(self.playerCup, (self.rectContent[0] + (self.rectContent[2] - self.playerCup.get_width()) / 2, self.rectContent[1] + self.rectContent[3]))
 
 
 class Leaderboard():
 	def __init__(self, playerList):
-		# self.gameScreen = pygame.display.set_mode((1280, 720))
+		# Screen
 		self.gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-		self.background = pygame.transform.scale(pygame.image.load("Assets/Images/Leaderboard/background.jpg"), (pygame.display.get_surface().get_size()))
+		self.background = pygame.transform.scale(Const.LEADERBOARD_BG, (pygame.display.get_surface().get_size()))
 		self.gameScreen.blit(self.background, (0, 0))
 		self.screenWidth, self.screenHeight = pygame.display.get_surface().get_size()
 
 		self.playerList = playerList
-
-		self.running = True
-
-		self.clock = pygame.time.Clock()
-
-		self.leaderboardText = "LEADERBOARD"
-		self.leaderboardTextSize = 80 * self.screenWidth // Const.MSI[0]
-		print(self.leaderboardTextSize)
-		self.leaderboardTextFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', self.leaderboardTextSize)
-		self.leaderboardTextCoord = ((self.screenWidth - self.leaderboardTextFont.size(self.leaderboardText)[0]) / 2, self.screenHeight / 17)
-		self.leaderboardTextRender = self.leaderboardTextFont.render(self.leaderboardText, True, Const.WHITE)
-
 		self.playerContainerNum = len(self.playerList)
 		
+		# Set up game
+		self.running = True
+		self.clock = pygame.time.Clock()
+
 		# sort
 		for i in range(self.playerContainerNum):
 			for j in range(i + 1, self.playerContainerNum):
 				if self.playerList[i].GetInfo()[1] < self.playerList[j].GetInfo()[1]:
 					self.playerList[i], self.playerList[j] = self.playerList[j], self.playerList[i]
 
-		self.playerContainerSize = (self.screenWidth / 4, self.screenHeight - (self.leaderboardTextFont.size(self.leaderboardText)[1] + self.screenHeight / 3.5))
-		self.playerContainerPadding = self.playerContainerSize[0] / 10
+		# Container
+		self.playerContainerSize = (self.screenWidth / 4, self.screenHeight * 6 / 10)
+		self.playerContainerPadding = self.playerContainerSize[0] * 1.5 / 10
 
-		playerContainerInitCoord = ((self.screenWidth - self.playerContainerSize[0] * self.playerContainerNum) / 2, self.screenHeight - self.playerContainerSize[1] - self.screenHeight / 8.5)
+		playerContainerInitCoord = ((self.screenWidth - self.playerContainerSize[0] * self.playerContainerNum) / 2, (self.screenHeight - self.playerContainerSize[1]) / 2)
 		self.playerContainer = []
 		for i in range(self.playerContainerNum):
 			playerContainerCoord = ((playerContainerInitCoord[0] + i * self.playerContainerSize[0], playerContainerInitCoord[1]))
@@ -87,8 +88,6 @@ class Leaderboard():
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					self.running = False
-
-			self.gameScreen.blit(self.leaderboardTextRender, self.leaderboardTextCoord)
 
 			for i in self.playerContainer:
 				i.Display()

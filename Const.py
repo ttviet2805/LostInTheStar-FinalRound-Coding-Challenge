@@ -47,16 +47,18 @@ PLAYER_IMAGE = [
 	pygame.image.load(f'Assets/Images/Player/ava{i}.png') for i in range(4)
 ]
 
-RANK_CUP = [
-	pygame.image.load(f'Assets/Images/Player/rank{i}.png') for i in range(1, 5)
-]
-
 # Map file
 mapFile = open("Assets/Example.json")
 mapData = json.load(mapFile)
 MAP_NORM = '.'
 MAP_OBS = '#'
 MAP_OZ = '#'
+
+# Leaderboard
+LEADERBOARD_BG = pygame.image.load("Assets/Images/Background/Leaderboard-Background.png")
+RANK_CUP = [
+	pygame.image.load(f'Assets/Images/Leaderboard/rank{i}.png') for i in range(1, 5)
+]
 
 # Menu
 MENU_BACKGROUND = pygame.image.load('Assets/Images/Background/Menu-Background.png')
