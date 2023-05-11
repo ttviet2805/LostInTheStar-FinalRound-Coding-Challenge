@@ -23,6 +23,10 @@ MAP_COLOR = (127, 115, 82)
 BACKGROUND_COLOR = (92, 98, 108)
 
 GAME_BACKGROUND = pygame.image.load('Assets/Images/Background/Game-Background.png')
+GAME_BACKGROUND_ENGINE = [
+	[pygame.image.load(f'Assets/Images/Background/left-engine-anim-{i}.png') for i in range(4)],
+	[pygame.image.load(f'Assets/Images/Background/right-engine-anim-{i}.png') for i in range(4)]
+]
 
 PLAYER_AVA = [pygame.image.load(f'Assets/Images/Status/Avatar_{i}.png') for i in range(1, 5)]
 PLAYER_AVA_DEAD = [pygame.image.load(f'Assets/Images/Status/deadAvatar_{i}.png') for i in range(1, 5)]

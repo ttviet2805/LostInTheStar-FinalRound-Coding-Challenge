@@ -5,6 +5,7 @@ import PlayerClass
 import PlayerStatus
 import MapClass
 import LeaderboardClass
+import MapEngineClass
 
 def CheckMoving(playerList):
 	for i in playerList:
@@ -55,6 +56,12 @@ def Run():
 	
 	# Set up player
 	playerList = []
+
+	# Map engine
+	mapEngine = [
+		MapEngineClass.MapEngine(gameScreen, (169, 590), (148, 148), 0),
+		MapEngineClass.MapEngine(gameScreen, (1231, 590), (148, 148), 1)
+	]
 
 	# Game Running
 	while running :
@@ -110,5 +117,8 @@ def Run():
 			if i != None:
 				i.MoveFrame()
 				i.drawStatus()
+
+		for i in mapEngine:
+			i.MoveFrame()
 
 		pygame.display.update()
