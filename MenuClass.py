@@ -3,6 +3,43 @@ import Const
 import ButtonClass
 import InGame
 
+import os
+
+def isExistInList(S, curList):
+	for i in curList:
+		if i == S:
+			return True
+
+	return False
+
+def findJsonFile(listTeam):
+	jsonPath = 'Assets/Json/'
+	dirList = os.listdir(jsonPath)
+
+	print(listTeam)
+
+	n = len(listTeam)
+
+	if n == 2:
+		for i in range(2):
+			for j in range(2):
+				curStr = Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '.json'
+
+				print("Str: " + curStr)
+				if(isExistInList(curStr, dirList)):
+					return jsonPath + curStr
+
+	if n == 4:
+		for i in range(4):
+			for j in range(4):
+				for k in range(4):
+					for t in range(4):
+						curStr = Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '_' + Const.PLAYER_NAME_LIST[listTeam[k]] + '_' + Const.PLAYER_NAME_LIST[listTeam[t]] + '.json'
+
+						if(isExistInList(curStr, dirList)):
+							return jsonPath + curStr
+	return -1
+
 class Menu():
 	def __init__(self):
 		pygame.init()
@@ -141,9 +178,21 @@ class Menu():
 
 			startState = self.startButton.isClicked(self.gameScreen)
 			if startState == True:
-				self.running = False
-				InGame.Run()
-				break
+				listTeam = []
+				for i in range(4):
+					if self.tickMode[i] == 1:
+						listTeam.append(i)
+
+				jsonFile = findJsonFile(listTeam)
+
+				print(jsonFile)
+				if jsonFile != -1:
+					self.running = False
+					print("OK")
+					print(jsonFile)
+					print(type(jsonFile))
+					InGame.Run(jsonFile, listTeam)
+					break
 
 			upState = self.upButton.isClicked(self.gameScreen)
 			if upState == True and self.mapSize < 21:

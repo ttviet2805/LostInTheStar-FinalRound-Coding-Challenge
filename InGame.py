@@ -14,7 +14,7 @@ def CheckMoving(playerList):
 				return True
 	return False
 
-def Run():
+def Run(jsonFile, listTeam):
 	# Init
 	pygame.init()
 
@@ -52,7 +52,7 @@ def Run():
 	mapCoordX = (screenWidth - mapWidth) / 2
 	mapCoordY = screenHeight * 133 / 406
 	# print (mapWidth, mapHeight, mapCoordX, mapCoordY)
-	gameMap = MapClass.Map(gameScreen, mapWidth, mapHeight, mapCoordX, mapCoordY)
+	gameMap = MapClass.Map(gameScreen, jsonFile, mapWidth, mapHeight, mapCoordX, mapCoordY)
 	
 	# Set up player
 	playerList = []
@@ -68,6 +68,8 @@ def Run():
 		MapEngineClass.MapEngine(gameScreen, MapEngineCoord[1], mapEngineSize, 1)
 	]
 
+	print(listTeam)
+
 	# Game Running
 	while running :
 		gameScreen.blit(gameBackground, (0, 0))
@@ -80,19 +82,19 @@ def Run():
 		key = pygame.key.get_pressed()
 		if CheckMoving(playerList) == False and key[pygame.K_RETURN]:
 			step += 1
-			if str(step) in Const.mapData:
+			if str(step) in MapClass.getMapData(jsonFile):
 				isNewStep = True
 				if step == 1:
 					# Set up Player
 					for i in range(4):
-						if str(i) in Const.mapData[str(step)]["players"]:
-							x = Const.mapData[str(step)]["players"][str(i)]["position"]["x"]
-							y = Const.mapData[str(step)]["players"][str(i)]["position"]["y"]
-							playerList.append(PlayerClass.Player(gameScreen, i, statusInfo, gameMap.GetCell(x, y)))
+						if str(i) in MapClass.getMapData(jsonFile)[str(step)]["players"]:
+							x = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i)]["position"]["x"]
+							y = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i)]["position"]["y"]
+							playerList.append(PlayerClass.Player(gameScreen, i, Const.PLAYER_NAME_LIST[listTeam[i]], statusInfo, gameMap.GetCell(x, y)))
 				else:
 					for i in playerList:
-						x = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["x"]
-						y = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["y"]
+						x = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i.GetID())]["position"]["x"]
+						y = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i.GetID())]["position"]["y"]
 						i.ChangeCell((x, y))
 				# isEndGame = True
 			else:

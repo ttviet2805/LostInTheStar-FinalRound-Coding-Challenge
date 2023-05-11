@@ -51,8 +51,6 @@ PLAYER_IMAGE = [
 ]
 
 # Map file
-mapFile = open("Assets/TripleChickens_Robotraicay_henmarte_A.K.M.json")
-mapData = json.load(mapFile)
 MAP_NORM = '.'
 MAP_OBS = '#'
 MAP_OZ = '#'
@@ -84,4 +82,4 @@ PLAYER_APPEAR_SOUND = pygame.mixer.Sound("Assets/Sounds/player_appear.mp3")
 PLAYER_DIE_SOUND = pygame.mixer.Sound("Assets/Sounds/player_die.mp3")
 
 # Player Name List
-PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'henmarte', 'TripleChicken']
+PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'henmarte', 'TripleChickens']

@@ -5,11 +5,13 @@ import PortalClass
 import PlayerStatus
 
 class Player():
-	def __init__(self, gameScreen, ID, statusInfo, curCell):
+	def __init__(self, gameScreen, ID, playerName, statusInfo, curCell):
 		# Status
 		self.playerID = ID
 		self.isAlive = True
-		self.status = PlayerStatus.PlayerStatus(gameScreen, ID, self.isAlive, Const.PLAYER_NAME_LIST[ID], Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
+		self.playerName = playerName
+		print(playerName)
+		self.status = PlayerStatus.PlayerStatus(gameScreen, ID, self.isAlive, playerName, Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
 
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
