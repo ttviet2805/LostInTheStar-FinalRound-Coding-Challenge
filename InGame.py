@@ -70,6 +70,16 @@ def Run(jsonFile, listTeam):
 
 	print(listTeam)
 
+	pregameImage = pygame.transform.scale(Const.PREGAME_BACKGROUND, (screenWidth, screenHeight))
+	
+	while(True):
+		tick = pygame.time.get_ticks()
+		print(tick)
+		if(tick >= 8000): 
+			break
+		gameScreen.blit(pregameImage, (0, 0))
+		pygame.display.update()
+
 	# Game Running
 	while running :
 		gameScreen.blit(gameBackground, (0, 0))

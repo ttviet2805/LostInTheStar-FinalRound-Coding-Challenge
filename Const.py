@@ -83,3 +83,6 @@ PLAYER_DIE_SOUND = pygame.mixer.Sound("Assets/Sounds/player_die.mp3")
 
 # Player Name List
 PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'henmarte', 'TripleChickens']
+
+# Pregame Background
+PREGAME_BACKGROUND = pygame.image.load('Assets/Images/Background/PreGame-Background.png')
