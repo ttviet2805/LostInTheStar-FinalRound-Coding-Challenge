@@ -144,6 +144,7 @@ class Menu():
 			if startState == True:
 				self.running = False
 				InGame.Run()
+				break
 
 			upState = self.upButton.isClicked(self.gameScreen)
 			if upState == True and self.mapSize < 21:

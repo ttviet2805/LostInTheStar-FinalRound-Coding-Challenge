@@ -94,7 +94,7 @@ def Run():
 						x = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["x"]
 						y = Const.mapData[str(step)]["players"][str(i.GetID())]["position"]["y"]
 						i.ChangeCell((x, y))
-				# isEndGame = True
+				isEndGame = True
 			else:
 				isEndGame = True
 
@@ -102,6 +102,7 @@ def Run():
 			running = False
 			leaderboard = LeaderboardClass.Leaderboard(playerList)
 			leaderboard.Run()
+			break
 
 		if CheckMoving(playerList) == False and isNewStep:
 			isNewStep = False

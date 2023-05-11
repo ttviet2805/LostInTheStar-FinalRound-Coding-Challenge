@@ -1,6 +1,8 @@
 import pygame
 import Const
 import PlayerClass
+import ButtonClass
+import MenuClass
 
 class LeaderboardInfo():
 	def __init__(self, gameScreen, containerSize, containerCoord, containerPadding, player, rank):
@@ -82,6 +84,12 @@ class Leaderboard():
 			playerContainerCoord = ((playerContainerInitCoord[0] + i * self.playerContainerSize[0], playerContainerInitCoord[1]))
 			self.playerContainer.append(LeaderboardInfo(self.gameScreen, self.playerContainerSize, playerContainerCoord, self.playerContainerPadding, self.playerList[i], i + 1))
 
+		# Back Button
+		self.backButtonSize = (self.screenWidth * 1 / 10, self.screenHeight * 1 / 10)
+		self.backButtonImage = pygame.transform.scale(Const.BACK_BUTTON_IMAGE, self.backButtonSize)
+		self.backButtonCoord = ((self.screenWidth - self.backButtonSize[0]) / 2, playerContainerInitCoord[1] + self.playerContainerSize[1] + (self.screenHeight - (playerContainerInitCoord[1] + self.playerContainerSize[1]) - self.backButtonSize[1]) / 2)
+		self.backButton = ButtonClass.Button(self.backButtonImage, self.backButtonCoord)
+
 	def Run(self):
 		while self.running:
 			self.clock.tick(10)
@@ -89,6 +97,17 @@ class Leaderboard():
 				if event.type == pygame.QUIT:
 					self.running = False
 
+			# Back Button
+			self.backButton.draw(self.gameScreen)
+
+			backState = self.backButton.isClicked(self.gameScreen)
+			if backState == True:
+				running = False
+				menuGame = MenuClass.Menu()
+				menuGame.Run()
+				break
+
 			for i in self.playerContainer:
 				i.Display()
+
 			pygame.display.update()

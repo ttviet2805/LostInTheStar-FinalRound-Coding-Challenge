@@ -59,6 +59,7 @@ LEADERBOARD_BG = pygame.image.load("Assets/Images/Background/Leaderboard-Backgro
 RANK_CUP = [
 	pygame.image.load(f'Assets/Images/Leaderboard/rank{i}.png') for i in range(1, 5)
 ]
+BACK_BUTTON_IMAGE = pygame.image.load('Assets/Images/Leaderboard/back-button.png')
 
 # Menu
 MENU_BACKGROUND = pygame.image.load('Assets/Images/Background/Menu-Background.png')
