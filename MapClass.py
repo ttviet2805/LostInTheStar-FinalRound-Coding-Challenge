@@ -75,13 +75,18 @@ class Map():
 			for cell in mapImageRow:
 				cell.DisplayBackgroundImage()
 
-	def UpdateMap(self, step):
+	def UpdateMap(self, step, curOutsideZone):
 		newMapList = getMap(self.jsonFile, step)[2]
 
 		for i in range(self.M):
 			for j in range(self.N):
-				if newMapList[i][j] == Const.MAP_OZ:
+				if self.mapList[i][j] == "." and newMapList[i][j] == Const.MAP_OZ:
 					self.mapImage[i][j].LockCell()
+				elif self.mapList[i][j] == "#":
+					curRound = min(i + 1, j + 1, self.M - i, self.N - j)
+					if curRound <= curOutsideZone:
+						if isinstance(self.mapImage[i][j], CellClass.ObstacleCell):
+							self.mapImage[i][j].LockCell()
 				elif newMapList[i][j].isupper():
 					newColor = 0
 					if newMapList[i][j] == "A":

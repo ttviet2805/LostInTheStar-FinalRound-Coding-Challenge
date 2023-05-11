@@ -14,6 +14,13 @@ def CheckMoving(playerList):
 				return True
 	return False
 
+def CheckAlive(playerList):
+	for i in playerList:
+		if i != None:
+			if i.GetIsAlive():
+				return True
+	return False
+
 def Run(jsonFile, listTeam):
 	# Init
 	pygame.init()
@@ -44,6 +51,7 @@ def Run(jsonFile, listTeam):
 
 	# Set up step
 	step = 0
+	curOutsideZone = 0
 	isNewStep = False
 
 	# Set up Map
@@ -96,6 +104,7 @@ def Run(jsonFile, listTeam):
 			step += 1
 			if str(step) in MapClass.getMapData(jsonFile):
 				isNewStep = True
+				frequency = MapClass.getMapData(jsonFile)[str(step)]["frequency"]
 				if step == 1:
 					# Set up Player
 					for i in range(4):
@@ -110,7 +119,12 @@ def Run(jsonFile, listTeam):
 						x = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i.GetID())]["position"]["x"]
 						y = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i.GetID())]["position"]["y"]
 						i.ChangeCell((x, y))
-				isEndGame = True
+				if CheckAlive(playerList):
+					if (step - 1) % frequency == 0:
+						curOutsideZone = (step - 1) / frequency
+				else:
+					curOutsideZone += 1
+				# isEndGame = True
 			else:
 				isEndGame = True
 
@@ -123,7 +137,7 @@ def Run(jsonFile, listTeam):
 
 		if CheckMoving(playerList) == False and isNewStep:
 			isNewStep = False
-			gameMap.UpdateMap(step)
+			gameMap.UpdateMap(step, curOutsideZone)
 
 			cnt = 0
 			for i in playerList:

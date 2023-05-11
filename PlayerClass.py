@@ -57,6 +57,9 @@ class Player():
 	def GetID(self):
 		return self.playerID
 
+	def GetIsAlive(self):
+		return self.isAlive
+
 	def MoveFrame(self):
 		if(self.appearFrame > 0):
 			pygame.mixer.Sound.play(Const.PLAYER_APPEAR_SOUND)
