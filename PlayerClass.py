@@ -8,7 +8,8 @@ class Player():
 	def __init__(self, gameScreen, ID, statusInfo, curCell):
 		# Status
 		self.playerID = ID
-		self.status = PlayerStatus.PlayerStatus(gameScreen, ID, "Viet" + str(ID), Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
+		self.isAlive = True
+		self.status = PlayerStatus.PlayerStatus(gameScreen, ID, self.isAlive, "Viet" + str(ID), Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
 
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
@@ -112,3 +113,6 @@ class Player():
 
 	def updateScore(self, curScore):
 		self.status.updateScore(curScore)
+
+	def updateAlive(self, isAlive):
+		self.status.updateAlive(isAlive)

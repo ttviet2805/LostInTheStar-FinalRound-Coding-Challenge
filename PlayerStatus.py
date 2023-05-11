@@ -2,7 +2,7 @@ import Const
 import pygame
 
 class PlayerStatus():
-	def __init__(self, gameScreen, ID, playerName, playerColor, statusCoord, statusLen):
+	def __init__(self, gameScreen, ID, isAlive, playerName, playerColor, statusCoord, statusLen):
 		self.gameScreen = gameScreen
 		self.playerName = playerName
 		self.playerColor = playerColor
@@ -10,11 +10,13 @@ class PlayerStatus():
 		self.statusLen = statusLen
 		self.playerID = ID
 		self.playerScore = 0
+		self.isAlive = isAlive
 		# self.statusBackground = pygame.transform.scale(Const.STATUS_BACKGROUND, statusLen)
 		
 		# Avatar
 		avaLen = statusLen[1] * 8 / 10
 		self.playerAva = pygame.transform.scale(Const.PLAYER_AVA[self.playerID], (avaLen, avaLen))
+		self.playerDeadAva = pygame.transform.scale(Const.PLAYER_AVA_DEAD[self.playerID], (avaLen, avaLen))
 		self.skinCoord = (self.statusCoord[0] + self.statusLen[0] * 1 / 10, self.statusCoord[1] + (self.statusLen[1] - avaLen) / 2)
 		
 		if ID % 2 != 0:
@@ -41,7 +43,10 @@ class PlayerStatus():
 			self.playerScoreCoord = (self.skinCoord[0] + (avaLen - scoreWidth) / 2, self.skinCoord[1] - statusLen[1] * 1 / 30)
 
 	def displayStatusImage(self):
-		self.gameScreen.blit(self.playerAva, self.skinCoord)
+		if self.isAlive == True:
+			self.gameScreen.blit(self.playerAva, self.skinCoord)
+		else:
+			self.gameScreen.blit(self.playerDeadAva, self.skinCoord)
 
 		self.gameScreen.blit(self.playerNameText, self.playerNameCoord)
 
@@ -50,6 +55,9 @@ class PlayerStatus():
 	def updateScore(self, curScore):
 		self.playerScore = curScore
 		self.playerScoreText = self.playerScoreFont.render(str(self.playerScore), True, Const.PLAYER_COLOR_DICT[self.playerColor])
+
+	def updateAlive(self, isAlive):
+		self.isAlive = isAlive
 
 	def GetInfo(self):
 		return (self.playerName, self.playerScore, self.playerColor, self.playerAva)

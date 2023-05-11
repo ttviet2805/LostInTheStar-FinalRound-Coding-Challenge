@@ -22,10 +22,10 @@ PLAYER_COLOR_DICT = {
 MAP_COLOR = (127, 115, 82)
 BACKGROUND_COLOR = (92, 98, 108)
 
-GAME_BACKGROUND = pygame.image.load('Assets/Images/Background.png')
+GAME_BACKGROUND = pygame.image.load('Assets/Images/Background/Game-Background.png')
 
 PLAYER_AVA = [pygame.image.load(f'Assets/Images/Status/Avatar_{i}.png') for i in range(1, 5)]
-
+PLAYER_AVA_DEAD = [pygame.image.load(f'Assets/Images/Status/deadAvatar_{i}.png') for i in range(1, 5)]
 
 CELL_LENGTH = 100
 CELL_IMAGE_LIST = [pygame.image.load(f'Assets/Images/Cell/tile_{i}.png') for i in range(11)]
@@ -51,3 +51,23 @@ RANK_CUP = [
 # Map file
 mapFile = open("Assets/Example.json")
 mapData = json.load(mapFile)
+
+
+# Menu
+MENU_BACKGROUND = pygame.image.load('Assets/Images/Background/Menu-Background.png')
+LOST_STAR_IMAGE = pygame.image.load('Assets/Images/Menu/title.png')
+START_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/start-button.png')
+TWO_PLAYER_IMAGE = pygame.image.load('Assets/Images/Menu/2player-button.png')
+FOUR_PLAYER_IMAGE = pygame.image.load('Assets/Images/Menu/4player-button.png')
+CHOOSE_IMAGE = pygame.image.load('Assets/Images/Menu/choose.png')
+TICK_IMAGE = [
+	pygame.image.load('Assets/Images/Menu/checkbox-unchecked.png'),
+	pygame.image.load('Assets/Images/Menu/checkbox-checked.png')
+]
+MAP_SIZE_IMAGE = pygame.image.load('Assets/Images/Menu/dropdown.png')
+UP_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/up.png')
+DOWN_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/down.png')
+
+
+
+

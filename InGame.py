@@ -18,14 +18,12 @@ def Run():
 	pygame.init()
 
 	# Set up Game Window
-	# gameScreen = pygame.display.set_mode((1280, 720))
 	gameScreen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 	pygame.display.set_caption("BombIT")
 	pygame.display.flip()
 
 	screenWidth, screenHeight = pygame.display.get_surface().get_size()
 	gameBackground = pygame.transform.scale(Const.GAME_BACKGROUND, (screenWidth, screenHeight))
-	print(screenWidth, screenHeight)
 	gameScreen.blit(gameBackground, (0, 0))
 
 	running = True
@@ -102,6 +100,8 @@ def Run():
 				if i != None:
 					curScore = gameMap.getScore(step, cnt)
 					i.updateScore(curScore)		
+					isAlive = gameMap.getAlive(step, cnt)
+					i.updateAlive(isAlive)
 					cnt += 1	
 
 		gameMap.DisplayMap()
