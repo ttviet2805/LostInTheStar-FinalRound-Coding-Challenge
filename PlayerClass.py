@@ -9,7 +9,7 @@ class Player():
 		# Status
 		self.playerID = ID
 		self.isAlive = True
-		self.status = PlayerStatus.PlayerStatus(gameScreen, ID, self.isAlive, "Viet" + str(ID), Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
+		self.status = PlayerStatus.PlayerStatus(gameScreen, ID, self.isAlive, Const.PLAYER_NAME_LIST[ID], Const.PLAYER_COLOR[ID], statusInfo[0][ID], statusInfo[1])
 
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
@@ -42,7 +42,7 @@ class Player():
 		return self.status.GetInfo()
 
 	def DisplayFrame(self):
-		print(self.animationDirection, self.curFrame, self.numFrame)
+		# print(self.animationDirection, self.curFrame, self.numFrame)
 		self.gameScreen.blit(self.playerFrame[self.animationDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
 	def GetIsMoving(self):

@@ -39,7 +39,7 @@ class Menu():
 		self.startButton = ButtonClass.Button(self.startButtonImage, self.startButtonCoord)
 
 		# Mode Text
-		self.modeTextFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 75)
+		self.modeTextFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 75 * self.screenWidth // Const.DELL[0])
 		self.modeText = self.modeTextFont.render("MODE", True, Const.WHITE)
 		modeHeight = self.modeTextFont.size("MODE")[1]
 		modeWidth = self.modeTextFont.size('MODE')[0]
@@ -77,14 +77,14 @@ class Menu():
 		self.tickButton = [[ButtonClass.Button(self.tickImage[j], self.tickCoord[i]) for j in range(2)] for i in range(4)]
 
 		# Team Text
-		self.teamTextFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 25)
-		self.teamText = [self.teamTextFont.render("Team " + str(i), True, Const.WHITE) for i in range(4)]
-		teamHeight = self.teamTextFont.size("Team 1")[1]
-		teamWidth = self.teamTextFont.size("Team 1")[0]
-		self.teamCoord = [(self.tickCoord[i][0] + self.screenWidth * 1 / 200 + self.tickSize[0], self.tickCoord[i][1] + (self.tickSize[1] - teamHeight) / 2) for i in range(4)]
+		self.teamTextFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 25 * self.screenWidth // Const.DELL[0])
+		self.teamText = [self.teamTextFont.render(Const.PLAYER_NAME_LIST[i], True, Const.WHITE) for i in range(4)]
+		teamHeight = [self.teamTextFont.size(Const.PLAYER_NAME_LIST[i])[1] for i in range(4)]
+		teamWidth = [self.teamTextFont.size(Const.PLAYER_NAME_LIST[i])[0] for i in range(4)]
+		self.teamCoord = [(self.tickCoord[i][0] + self.screenWidth * 1 / 200 + self.tickSize[0], self.tickCoord[i][1] + (self.tickSize[1] - teamHeight[i]) / 2) for i in range(4)]
 
 		# Map Text
-		self.mapTextFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 75)
+		self.mapTextFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 75 * self.screenWidth // Const.DELL[0])
 		self.mapText = self.mapTextFont.render("MAP", True, Const.WHITE)
 		mapHeight = self.mapTextFont.size("MAP")[1]
 		mapWidth = self.mapTextFont.size('MAP')[0]
@@ -108,13 +108,12 @@ class Menu():
 		self.downButton = ButtonClass.Button(self.downButtonImage, self.downButtonCoord)
 
 		# Map Num Cell Text
-		self.mapNumCellFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 40)
+		self.mapNumCellFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 40 * self.screenWidth // Const.DELL[0])
 		mapNumCellStr = "MAP " + str(self.mapSize - 10) + " (" + str(self.mapSize) + "x" + str(self.mapSize) + ")"
 		self.mapNumCellText = self.mapNumCellFont.render(mapNumCellStr, True, Const.WHITE)
 		mapNumCellHeight = self.mapNumCellFont.size(mapNumCellStr)[1]
 		mapNumCellWidth = self.mapNumCellFont.size(mapNumCellStr)[0]
 		self.mapNumCellCoord = (self.mapSizeCoord[0] + (self.mapSizeSize[0] - mapNumCellWidth - self.upButtonSize[0]) / 2, self.mapSizeCoord[1] + (self.mapSizeSize[1] - mapNumCellHeight) / 2)
-
 
 
 	def Run(self):
