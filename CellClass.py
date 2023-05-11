@@ -8,6 +8,14 @@ class Cell():
 		self.cellIndex = cellIndex
 		self.listAdj = [None, None, None, None]
 		self.move = [(-1, -1), (1, -1), (1, 1), (-1, 1)]
+		self.playerSet = set()
+
+	def AddPlayer(self, playerId):
+		self.playerSet.add(playerId)
+
+	def RemovePlayer(self, playerId):
+		if playerId in self.playerSet:
+			self.playerSet.discard(playerId)
 
 	def AddAdj(self, adjCell, pos):
 		if pos < 0 or pos > 3:
@@ -18,6 +26,8 @@ class Cell():
 		return self.cellIndex
 
 	def GetPlayerPos(self, playerId):
+		if len(self.playerSet) <= 1:
+			return self.cellCoord
 		return (self.cellCoord[0] + self.move[playerId][0] * self.cellLen / 5, self.cellCoord[1] + self.move[playerId][1] * self.cellLen / 5)
 
 	def GetPos(self):

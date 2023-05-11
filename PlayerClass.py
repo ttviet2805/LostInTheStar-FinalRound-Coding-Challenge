@@ -15,7 +15,8 @@ class Player():
 
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
-		self.playerCoord = self.playerCell.GetPlayerPos(self.playerID)
+		self.playerCell.AddPlayer(self.playerID)
+		self.playerCoord = (-1, -1)
 		self.playerFrameHeight = self.playerCell.GetLen() / 6 * 7
 		self.playerFrameWidth = self.playerFrameHeight / 7 * 5
 		# self.playerPadding = ((self.playerCell.GetLen() - self.playerFrameWidth) / 2, (self.playerCell.GetLen() - self.playerFrameHeight) * 2) 
@@ -44,7 +45,8 @@ class Player():
 		return self.status.GetInfo()
 
 	def DisplayFrame(self):
-		# print(self.animationDirection, self.curFrame, self.numFrame)
+		if self.playerCoord == (-1, -1):
+			self.playerCoord = self.playerCell.GetPlayerPos(self.playerID)
 		self.gameScreen.blit(self.playerFrame[self.animationDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
 	def GetIsMoving(self):
@@ -95,7 +97,9 @@ class Player():
 		if newDirection == 1 or newDirection == 3:
 			self.ChangeAnimation(newDirection // 2)
 
-		if self.playerCell.GetAdj(self.moveDirection) != None:
+		if self.playerCell.GetAdj(self.moveDirection) != None and self.isMoving == False:
+			self.playerCell.RemovePlayer(self.playerID)
+			self.playerCell.GetAdj(self.moveDirection).AddPlayer(self.playerID)
 			self.isMoving = True
 
 	def ChangeCell(self, newCellIndex):
