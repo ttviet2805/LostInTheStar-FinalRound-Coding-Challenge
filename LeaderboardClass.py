@@ -50,7 +50,7 @@ class LeaderboardInfo():
 		scoreHeight = self.scoreFont.size(str(self.playerInfo[1]))[1]
 		self.gameScreen.blit(scoreText, (self.rectContent[0] + (self.rectContent[2] - scoreWidth) / 2, self.playerAvaCoord[1] + self.playerAvaSize[1] + (self.rectContent[1] + self.rectContent[3] - self.playerAvaCoord[1] - self.playerAvaSize[1]  - nameHeight) / 2))
 
-		self.gameScreen.blit(self.playerCup, (self.rectContent[0] + (self.rectContent[2] - self.playerCup.get_width()) / 2, self.rectContent[1] + self.rectContent[3]))
+		self.gameScreen.blit(self.playerCup, (self.rectContent[0] + (self.rectContent[2] - self.playerCup.get_width()) / 2, self.rectContent[1] + self.rectContent[3] + self.rectPadding))
 
 
 class Leaderboard():

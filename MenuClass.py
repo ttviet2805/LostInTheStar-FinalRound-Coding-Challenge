@@ -116,7 +116,7 @@ class Menu():
 		self.tickButton = [[ButtonClass.Button(self.tickImage[j], self.tickCoord[i]) for j in range(2)] for i in range(4)]
 
 		# Team Text
-		self.teamTextFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 25 * self.screenWidth // Const.DELL[0])
+		self.teamTextFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 24 * self.screenWidth // Const.DELL[0])
 		self.teamText = [self.teamTextFont.render(Const.PLAYER_NAME_LIST[i], True, Const.WHITE) for i in range(4)]
 		teamHeight = [self.teamTextFont.size(Const.PLAYER_NAME_LIST[i])[1] for i in range(4)]
 		teamWidth = [self.teamTextFont.size(Const.PLAYER_NAME_LIST[i])[0] for i in range(4)]
