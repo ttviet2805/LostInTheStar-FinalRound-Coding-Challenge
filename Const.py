@@ -82,6 +82,7 @@ CLICK_BUTTON_SOUND = pygame.mixer.Sound("Assets/Sounds/click_button.mp3")
 PLAYER_APPEAR_SOUND = pygame.mixer.Sound("Assets/Sounds/player_appear.mp3")
 PLAYER_DIE_SOUND = pygame.mixer.Sound("Assets/Sounds/player_die.mp3")
 LEADERBOARD_SOUND = pygame.mixer.Sound("Assets/Sounds/leaderboard.mp3")
+INGAME_SOUND = pygame.mixer.Sound("Assets/Sounds/ingame_1.mp3")
 
 # Player Name List
 PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'henmarte', 'TripleChickens']

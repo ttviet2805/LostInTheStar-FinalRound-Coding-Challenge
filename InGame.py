@@ -79,6 +79,8 @@ def Run(jsonFile, listTeam):
 			break
 		gameScreen.blit(pregameImage, (0, 0))
 		pygame.display.update()
+	
+	pygame.mixer.Sound.play(Const.INGAME_SOUND, loops = -1)
 
 	# Game Running
 	while running :
@@ -114,6 +116,7 @@ def Run(jsonFile, listTeam):
 
 		if isEndGame:
 			running = False
+			pygame.mixer.stop()
 			leaderboard = LeaderboardClass.Leaderboard(playerList)
 			leaderboard.Run()
 			break
