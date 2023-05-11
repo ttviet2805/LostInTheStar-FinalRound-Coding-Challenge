@@ -27,7 +27,7 @@ class Player():
 			self.playerFrame.append(playerFrameList)
 
 		self.moveDirection = 2
-		self.animationDirection = 1
+		self.animationDirection = 0
 		self.curFrame = 0
 		self.numFrame = len(self.playerFrame[self.animationDirection])
 		self.isMoving = False
