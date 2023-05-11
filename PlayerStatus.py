@@ -56,7 +56,12 @@ class PlayerStatus():
 	def updateScore(self, curScore):
 		self.playerScore = curScore
 		self.playerScoreText = self.playerScoreFont.render(str(self.playerScore), True, Const.PLAYER_COLOR_DICT[self.playerColor])
+		self.scoreHeight = self.playerScoreFont.size(str(self.playerScore))[1]
+		self.scoreWidth = self.playerScoreFont.size(str(self.playerScore))[0]
 		self.playerScoreCoord = (self.skinCoord[0] + (self.avaLen - self.scoreWidth) / 2, self.skinCoord[1] + self.avaLen + self.statusLen[1] * 1 / 30)
+
+		if self.playerID > 1:
+			self.playerScoreCoord = (self.skinCoord[0] + (self.avaLen - self.scoreWidth) / 2, self.skinCoord[1] - self.scoreHeight - self.statusLen[1] * 1 / 30)
 
 	def updateAlive(self, isAlive):
 		self.isAlive = isAlive
