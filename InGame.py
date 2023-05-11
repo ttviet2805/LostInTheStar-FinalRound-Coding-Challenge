@@ -57,10 +57,15 @@ def Run():
 	# Set up player
 	playerList = []
 
-	# Map engine
+	# Set up Map engine
+	mapEngineSize = (screenWidth * 62 / 610, screenHeight * 64 / 406)
+	MapEngineCoord = (
+		(screenWidth * 65 / 610, screenHeight * 278 / 406), 
+		(screenWidth * 488 / 610, screenHeight * 278 / 406)
+	)
 	mapEngine = [
-		MapEngineClass.MapEngine(gameScreen, (169, 590), (148, 148), 0),
-		MapEngineClass.MapEngine(gameScreen, (1231, 590), (148, 148), 1)
+		MapEngineClass.MapEngine(gameScreen, MapEngineCoord[0], mapEngineSize, 0),
+		MapEngineClass.MapEngine(gameScreen, MapEngineCoord[1], mapEngineSize, 1)
 	]
 
 	# Game Running
