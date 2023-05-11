@@ -78,8 +78,10 @@ UP_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/up.png')
 DOWN_BUTTON_IMAGE = pygame.image.load('Assets/Images/Menu/down.png')
 
 # Sound
+CLICK_BUTTON_SOUND = pygame.mixer.Sound("Assets/Sounds/click_button.mp3")
 PLAYER_APPEAR_SOUND = pygame.mixer.Sound("Assets/Sounds/player_appear.mp3")
 PLAYER_DIE_SOUND = pygame.mixer.Sound("Assets/Sounds/player_die.mp3")
+LEADERBOARD_SOUND = pygame.mixer.Sound("Assets/Sounds/leaderboard.mp3")
 
 # Player Name List
 PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'henmarte', 'TripleChickens']

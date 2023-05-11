@@ -91,6 +91,7 @@ class Leaderboard():
 		self.backButton = ButtonClass.Button(self.backButtonImage, self.backButtonCoord)
 
 	def Run(self):
+		pygame.mixer.Sound.play(Const.LEADERBOARD_SOUND)
 		while self.running:
 			self.clock.tick(10)
 			for event in pygame.event.get():

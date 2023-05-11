@@ -44,9 +44,11 @@ class Player():
 	def GetInfo(self):
 		return self.status.GetInfo()
 
-	def DisplayFrame(self):
+	def UpdateCoord(self):
 		if self.playerCoord == (-1, -1):
 			self.playerCoord = self.playerCell.GetPlayerPos(self.playerID)
+
+	def DisplayFrame(self):
 		self.gameScreen.blit(self.playerFrame[self.animationDirection][self.curFrame], (self.playerCoord[0] + self.playerPadding[0], self.playerCoord[1] + self.playerPadding[1]))
 
 	def GetIsMoving(self):
@@ -57,7 +59,7 @@ class Player():
 
 	def MoveFrame(self):
 		if(self.appearFrame > 0):
-			# pygame.mixer.Sound.play(Const.PLAYER_APPEAR_SOUND)
+			pygame.mixer.Sound.play(Const.PLAYER_APPEAR_SOUND)
 			self.playerPortal.MoveFrame()
 			self.appearFrame -= 1
 			return

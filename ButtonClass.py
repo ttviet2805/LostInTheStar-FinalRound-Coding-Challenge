@@ -1,4 +1,5 @@
 import pygame
+import Const
 
 class Button() :
 	def __init__(self, image, initCoord):
@@ -18,6 +19,7 @@ class Button() :
 		pos = pygame.mouse.get_pos()
 		if self.rect.collidepoint(pos) :
 			if(pygame.mouse.get_pressed()[0] == 1  and self.clicked == False):
+				pygame.mixer.Sound.play(Const.CLICK_BUTTON_SOUND)
 				self.clicked = True
 				action = True 
 		if(pygame.mouse.get_pressed()[0] == 0): 

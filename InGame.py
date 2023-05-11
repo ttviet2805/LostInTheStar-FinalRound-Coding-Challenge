@@ -101,12 +101,14 @@ def Run(jsonFile, listTeam):
 							x = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i)]["position"]["x"]
 							y = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i)]["position"]["y"]
 							playerList.append(PlayerClass.Player(gameScreen, i, listTeam[i], statusInfo, gameMap.GetCell(x, y)))
+					for i in playerList:
+						i.UpdateCoord()
 				else:
 					for i in playerList:
 						x = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i.GetID())]["position"]["x"]
 						y = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i.GetID())]["position"]["y"]
 						i.ChangeCell((x, y))
-				# isEndGame = True
+				isEndGame = True
 			else:
 				isEndGame = True
 
