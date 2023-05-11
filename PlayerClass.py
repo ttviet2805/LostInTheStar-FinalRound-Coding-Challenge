@@ -115,4 +115,5 @@ class Player():
 		self.status.updateScore(curScore)
 
 	def updateAlive(self, isAlive):
+		self.isAlive = isAlive
 		self.status.updateAlive(isAlive)
