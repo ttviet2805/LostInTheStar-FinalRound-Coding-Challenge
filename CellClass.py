@@ -7,6 +7,7 @@ class Cell():
 		self.cellCoord = cellCoord
 		self.cellIndex = cellIndex
 		self.listAdj = [None, None, None, None]
+		self.move = [(-1, -1), (1, -1), (1, 1), (-1, 1)]
 
 	def AddAdj(self, adjCell, pos):
 		if pos < 0 or pos > 3:
@@ -16,7 +17,10 @@ class Cell():
 	def GetCellIndex(self):
 		return self.cellIndex
 
-	def GetCenter(self):
+	def GetPlayerPos(self, playerId):
+		return (self.cellCoord[0] + self.move[playerId][0] * self.cellLen / 5, self.cellCoord[1] + self.move[playerId][1] * self.cellLen / 5)
+
+	def GetPos(self):
 		return self.cellCoord
 
 	def GetAdj(self, pos):

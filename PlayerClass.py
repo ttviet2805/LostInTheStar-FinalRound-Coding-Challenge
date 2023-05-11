@@ -13,7 +13,7 @@ class Player():
 
 		self.gameScreen = gameScreen
 		self.playerCell = curCell
-		self.playerCoord = self.playerCell.GetCenter()
+		self.playerCoord = self.playerCell.GetPlayerPos(self.playerID)
 		self.playerFrameHeight = self.playerCell.GetLen() / 6 * 7
 		self.playerFrameWidth = self.playerFrameHeight / 7 * 5
 		# self.playerPadding = ((self.playerCell.GetLen() - self.playerFrameWidth) / 2, (self.playerCell.GetLen() - self.playerFrameHeight) * 2) 
@@ -53,7 +53,7 @@ class Player():
 
 	def MoveFrame(self):
 		if(self.appearFrame > 0):
-			pygame.mixer.Sound.play(Const.PLAYER_APPEAR_SOUND)
+			# pygame.mixer.Sound.play(Const.PLAYER_APPEAR_SOUND)
 			self.playerPortal.MoveFrame()
 			self.appearFrame -= 1
 			return
@@ -64,16 +64,16 @@ class Player():
 
 	def MovePlayer(self):
 		newCell = self.playerCell.GetAdj(self.moveDirection)
-		if self.playerCoord == newCell.GetCenter():
+		if self.playerCoord == newCell.GetPlayerPos(self.playerID):
 			self.playerCell = newCell
-			self.playerCoord = self.playerCell.GetCenter()
+			self.playerCoord = self.playerCell.GetPlayerPos(self.playerID)
 			self.isMoving = False
 			return
 		newCoord = []
 		for i in range(0, 2):
-			moveLen = min(abs(newCell.GetCenter()[i] - self.playerCoord[i]), self.moveSpeed)
+			moveLen = min(abs(newCell.GetPlayerPos(self.playerID)[i] - self.playerCoord[i]), self.moveSpeed)
 			newCoord.append(self.playerCoord[i])
-			if(newCell.GetCenter()[i] > self.playerCoord[i]):
+			if(newCell.GetPlayerPos(self.playerID)[i] > self.playerCoord[i]):
 				newCoord[i] += moveLen
 			else:
 				newCoord[i] -= moveLen

@@ -6,7 +6,7 @@ class Portal():
 	def __init__(self, gameScreen, curCell):
 		self.gameScreen = gameScreen
 		self.portalCell = curCell
-		self.portalCoord = self.portalCell.GetCenter()
+		self.portalCoord = self.portalCell.GetPos()
 		self.portalFrameHeight = self.portalCell.GetLen() / 6 * 7
 		self.portalFrameWidth = self.portalFrameHeight
 		self.portalPadding = ((self.portalCell.GetLen() - self.portalFrameWidth) / 2, (self.portalCell.GetLen() - self.portalFrameHeight) / 2) 
