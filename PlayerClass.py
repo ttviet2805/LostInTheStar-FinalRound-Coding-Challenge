@@ -39,7 +39,7 @@ class Player():
 		self.moveSpeed = 10
 
 		self.playerPortal = PortalClass.Portal(gameScreen, curCell)
-		self.appearFrame = 18
+		self.appearFrame = 9
 
 	def GetInfo(self):
 		return self.status.GetInfo()

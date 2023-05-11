@@ -36,10 +36,6 @@ def Run(jsonFile, listTeam):
 
 	running = True
 
-	# Set up Clock
-	clock = pygame.time.Clock()
-	isEndGame = False
-
 	# Set up Player Status
 	statusWidth = screenWidth * 120 / 610;
 	statusHeight = screenHeight * 80 / 406
@@ -90,6 +86,12 @@ def Run(jsonFile, listTeam):
 	
 	pygame.mixer.Sound.play(Const.INGAME_SOUND, loops = -1)
 
+	# Set up Clock
+	clock = pygame.time.Clock()
+	isEndGame = False
+	initTick = pygame.time.get_ticks()
+	stepTime = 1.5
+
 	# Game Running
 	while running :
 		gameScreen.blit(gameBackground, (0, 0))
@@ -100,7 +102,10 @@ def Run(jsonFile, listTeam):
 
 		# Handle event
 		key = pygame.key.get_pressed()
-		if CheckMoving(playerList) == False and key[pygame.K_RETURN]:
+		tick = pygame.time.get_ticks()
+		# if CheckMoving(playerList) == False and key[pygame.K_RETURN]:
+		if CheckMoving(playerList) == False and tick >= initTick + stepTime * 1000:
+			initTick += stepTime * 1000
 			step += 1
 			if str(step) in MapClass.getMapData(jsonFile):
 				isNewStep = True
