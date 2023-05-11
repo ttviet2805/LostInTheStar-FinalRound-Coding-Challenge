@@ -90,7 +90,7 @@ def Run(jsonFile, listTeam):
 						if str(i) in MapClass.getMapData(jsonFile)[str(step)]["players"]:
 							x = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i)]["position"]["x"]
 							y = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i)]["position"]["y"]
-							playerList.append(PlayerClass.Player(gameScreen, i, Const.PLAYER_NAME_LIST[listTeam[i]], statusInfo, gameMap.GetCell(x, y)))
+							playerList.append(PlayerClass.Player(gameScreen, i, listTeam[i], statusInfo, gameMap.GetCell(x, y)))
 				else:
 					for i in playerList:
 						x = MapClass.getMapData(jsonFile)[str(step)]["players"][str(i.GetID())]["position"]["x"]

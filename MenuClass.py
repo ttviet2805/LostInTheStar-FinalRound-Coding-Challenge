@@ -27,7 +27,8 @@ def findJsonFile(listTeam):
 
 				print("Str: " + curStr)
 				if(isExistInList(curStr, dirList)):
-					return jsonPath + curStr
+					newListTeam = [Const.PLAYER_NAME_LIST[listTeam[i]], Const.PLAYER_NAME_LIST[listTeam[j]]]
+					return (jsonPath + curStr, newListTeam)
 
 	if n == 4:
 		for i in range(4):
@@ -37,8 +38,9 @@ def findJsonFile(listTeam):
 						curStr = Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '_' + Const.PLAYER_NAME_LIST[listTeam[k]] + '_' + Const.PLAYER_NAME_LIST[listTeam[t]] + '.json'
 
 						if(isExistInList(curStr, dirList)):
-							return jsonPath + curStr
-	return -1
+							newListTeam = [Const.PLAYER_NAME_LIST[listTeam[i]], Const.PLAYER_NAME_LIST[listTeam[j]], Const.PLAYER_NAME_LIST[listTeam[k]], Const.PLAYER_NAME_LIST[listTeam[t]]]
+							return (jsonPath + curStr, newListTeam)
+	return (-1, 0)
 
 class Menu():
 	def __init__(self):
@@ -183,15 +185,13 @@ class Menu():
 					if self.tickMode[i] == 1:
 						listTeam.append(i)
 
-				jsonFile = findJsonFile(listTeam)
+				jsonFile = findJsonFile(listTeam)[0]
 
 				print(jsonFile)
 				if jsonFile != -1:
+					newListTeam = findJsonFile(listTeam)[1]
 					self.running = False
-					print("OK")
-					print(jsonFile)
-					print(type(jsonFile))
-					InGame.Run(jsonFile, listTeam)
+					InGame.Run(jsonFile, newListTeam)
 					break
 
 			upState = self.upButton.isClicked(self.gameScreen)
