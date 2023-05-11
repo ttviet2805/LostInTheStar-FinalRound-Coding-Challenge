@@ -74,23 +74,26 @@ def Run(jsonFile, listTeam):
 
 	print(listTeam)
 
-	pregameImage = pygame.transform.scale(Const.PREGAME_BACKGROUND, (screenWidth, screenHeight))
-	
-	while(True):
-		tick = pygame.time.get_ticks()
-		print(tick)
-		if(tick >= 8000): 
-			break
-		gameScreen.blit(pregameImage, (0, 0))
-		pygame.display.update()
-	
-	pygame.mixer.Sound.play(Const.INGAME_SOUND, loops = -1)
-
 	# Set up Clock
 	clock = pygame.time.Clock()
 	isEndGame = False
 	initTick = pygame.time.get_ticks()
 	stepTime = 1.5
+
+	pregameImage = pygame.transform.scale(Const.PREGAME_BACKGROUND, (screenWidth, screenHeight))
+	preGameCnt = 0	
+
+	# while(True):
+	# 	clock.tick(10)
+	# 	print(preGameCnt)
+		
+	# 	if(preGameCnt >= 100): 
+	# 		break
+	# 	preGameCnt += 1
+	# 	gameScreen.blit(pregameImage, (0, 0))
+	# 	pygame.display.update()
+	
+	pygame.mixer.Sound.play(Const.INGAME_SOUND, loops = -1)
 
 	# Game Running
 	while running :
