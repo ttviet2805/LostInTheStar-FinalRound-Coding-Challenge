@@ -197,14 +197,18 @@ class Menu():
 					break
 
 			upState = self.upButton.isClicked(self.gameScreen)
-			if upState == True and self.mapID < 7:
+			if upState == True:
 				self.mapID += 1
+				if(self.mapID > 7): 
+					self.mapID = 1
 				mapNumCellStr = "MAP " + str(self.mapID)
 				self.mapNumCellText = self.mapNumCellFont.render(mapNumCellStr, True, Const.WHITE)
 
 			downState = self.downButton.isClicked(self.gameScreen)
-			if downState == True and self.mapID > 1:
+			if downState == True:
 				self.mapID -= 1
+				if(self.mapID == 0): 
+					self.mapID = 7
 				mapNumCellStr = "MAP " + str(self.mapID)
 				self.mapNumCellText = self.mapNumCellFont.render(mapNumCellStr, True, Const.WHITE)
 
