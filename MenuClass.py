@@ -25,7 +25,7 @@ def findJsonFile(listTeam):
 			for j in range(2):
 				curStr = Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '.json'
 
-				print("Str: " + curStr)
+				# print("Str: " + curStr)
 				if(isExistInList(curStr, dirList)):
 					newListTeam = [Const.PLAYER_NAME_LIST[listTeam[i]], Const.PLAYER_NAME_LIST[listTeam[j]]]
 					return (jsonPath + curStr, newListTeam)
@@ -187,7 +187,7 @@ class Menu():
 
 				jsonFile = findJsonFile(listTeam)[0]
 
-				print(jsonFile)
+				# print(jsonFile)
 				if jsonFile != -1:
 					newListTeam = findJsonFile(listTeam)[1]
 					self.running = False

@@ -122,3 +122,7 @@ class Map():
 	def getAlive(self, step, ID):
 		curMapData = getMapData(self.jsonFile)
 		return curMapData[str(step)]["players"][str(ID)]['alive']
+
+	def getFrequency(self, step):
+		curMapData = getMapData(self.jsonFile)
+		return curMapData[str(step)]['frequency']

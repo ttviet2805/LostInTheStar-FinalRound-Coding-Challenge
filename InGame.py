@@ -92,6 +92,19 @@ def Run(jsonFile, listTeam):
 	# 	preGameCnt += 1
 	# 	gameScreen.blit(pregameImage, (0, 0))
 	# 	pygame.display.update()
+
+	# Frequency
+	# Player Name
+	frequencyFont = pygame.font.Font('Assets/Fonts/VCR_OSD_MONO.ttf', 50 * screenWidth // Const.DELL[0])
+	maxFrequency = gameMap.getFrequency(step)
+	numFrequency = maxFrequency
+	frequencyStr = str(numFrequency)
+	frequencyText = frequencyFont.render(frequencyStr, True, Const.WHITE)
+	frequencyHeight = frequencyFont.size(frequencyStr)[1]
+	frequencyWidth = frequencyFont.size(frequencyStr)[0]
+	frequencyCoord = ((screenWidth - frequencyWidth) / 2, screenHeight * 1 / 50)
+
+
 	
 	pygame.mixer.Sound.play(Const.INGAME_SOUND, loops = -1)
 
@@ -156,6 +169,17 @@ def Run(jsonFile, listTeam):
 					i.updateAlive(isAlive)
 					cnt += 1	
 
+			# Draw Frequency
+			numFrequency -= 1
+			if numFrequency < 0:
+				numFrequency = maxFrequency
+			frequencyStr = str(numFrequency)
+			frequencyText = frequencyFont.render(frequencyStr, True, Const.WHITE)
+			frequencyHeight = frequencyFont.size(frequencyStr)[1]
+			frequencyWidth = frequencyFont.size(frequencyStr)[0]
+			frequencyCoord = ((screenWidth - frequencyWidth) / 2, screenHeight * 1 / 50)
+
+
 		gameMap.DisplayMap()
 
 		for i in playerList:
@@ -165,5 +189,8 @@ def Run(jsonFile, listTeam):
 
 		for i in mapEngine:
 			i.MoveFrame()
+
+		# Draw Frequency
+		gameScreen.blit(frequencyText, frequencyCoord)
 
 		pygame.display.update()
