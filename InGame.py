@@ -78,16 +78,15 @@ def Run(jsonFile, listTeam):
 	clock = pygame.time.Clock()
 	isEndGame = False
 	initTick = pygame.time.get_ticks()
-	stepTime = 1.5
+	stepTime = 0.75
 
 	pregameImage = pygame.transform.scale(Const.PREGAME_BACKGROUND, (screenWidth, screenHeight))
 	preGameCnt = 0	
 
 	# while(True):
-	# 	clock.tick(10)
 	# 	print(preGameCnt)
 		
-	# 	if(preGameCnt >= 100): 
+	# 	if(preGameCnt >= 1000): 
 	# 		break
 	# 	preGameCnt += 1
 	# 	gameScreen.blit(pregameImage, (0, 0))

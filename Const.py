@@ -53,7 +53,7 @@ PLAYER_IMAGE = [
 # Map file
 MAP_NORM = '.'
 MAP_OBS = '#'
-MAP_OZ = '#'
+MAP_OZ = '*'
 
 # Leaderboard
 LEADERBOARD_BG = pygame.image.load("Assets/Images/Background/Leaderboard-Background.png")
@@ -85,7 +85,7 @@ LEADERBOARD_SOUND = pygame.mixer.Sound("Assets/Sounds/leaderboard.mp3")
 INGAME_SOUND = pygame.mixer.Sound("Assets/Sounds/ingame_1.mp3")
 
 # Player Name List
-PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'henmarte', 'TripleChickens']
+PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'Henmarte', 'TripleChickens']
 
 # Pregame Background
 PREGAME_BACKGROUND = pygame.image.load('Assets/Images/Background/PreGame-Background.png')
