@@ -170,7 +170,7 @@ def Run(jsonFile, listTeam):
 
 			# Draw Frequency
 			numFrequency -= 1
-			if numFrequency < 0:
+			if numFrequency <= 0:
 				numFrequency = maxFrequency
 			frequencyStr = str(numFrequency)
 			frequencyText = frequencyFont.render(frequencyStr, True, Const.WHITE)

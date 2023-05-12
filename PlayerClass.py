@@ -36,7 +36,7 @@ class Player():
 		self.curFrame = 0
 		self.numFrame = len(self.playerFrame[self.animationDirection])
 		self.isMoving = False
-		self.moveSpeed = 10
+		self.moveSpeed = 15
 
 		self.playerPortal = PortalClass.Portal(gameScreen, curCell)
 		self.appearFrame = 9
