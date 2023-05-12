@@ -85,7 +85,7 @@ LEADERBOARD_SOUND = pygame.mixer.Sound("Assets/Sounds/leaderboard.mp3")
 INGAME_SOUND = pygame.mixer.Sound("Assets/Sounds/ingame_1.mp3")
 
 # Player Name List
-PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'Henmarte', 'TripleChickens']
+PLAYER_NAME_LIST = ['Robotraicay', 'A.K.M', 'henmarte', 'TripleChickens']
 
 # Pregame Background
 PREGAME_BACKGROUND = pygame.image.load('Assets/Images/Background/PreGame-Background.png')
