@@ -12,7 +12,7 @@ def isExistInList(S, curList):
 
 	return False
 
-def findJsonFile(listTeam):
+def findJsonFile(listTeam, mapID):
 	jsonPath = 'Assets/Json/'
 	dirList = os.listdir(jsonPath)
 
@@ -20,10 +20,12 @@ def findJsonFile(listTeam):
 
 	n = len(listTeam)
 
+	mapFirstChar = chr(ord('A')+ mapID - 1)
+
 	if n == 2:
 		for i in range(2):
 			for j in range(2):
-				curStr = Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '.json'
+				curStr = mapFirstChar + '_' + Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '.json'
 
 				# print("Str: " + curStr)
 				if(isExistInList(curStr, dirList)):
@@ -35,7 +37,7 @@ def findJsonFile(listTeam):
 			for j in range(4):
 				for k in range(4):
 					for t in range(4):
-						curStr = Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '_' + Const.PLAYER_NAME_LIST[listTeam[k]] + '_' + Const.PLAYER_NAME_LIST[listTeam[t]] + '.json'
+						curStr = mapFirstChar + '_' + Const.PLAYER_NAME_LIST[listTeam[i]] + '_' + Const.PLAYER_NAME_LIST[listTeam[j]] + '_' + Const.PLAYER_NAME_LIST[listTeam[k]] + '_' + Const.PLAYER_NAME_LIST[listTeam[t]] + '.json'
 
 						if(isExistInList(curStr, dirList)):
 							newListTeam = [Const.PLAYER_NAME_LIST[listTeam[i]], Const.PLAYER_NAME_LIST[listTeam[j]], Const.PLAYER_NAME_LIST[listTeam[k]], Const.PLAYER_NAME_LIST[listTeam[t]]]
@@ -60,7 +62,7 @@ class Menu():
 		##### Prepare Data For Ingame
 		self.mode = 0
 		self.tickMode = [0, 0, 0, 0]
-		self.mapSize = 15
+		self.mapID = 1
 
 		# Run
 		self.running = True
@@ -148,7 +150,7 @@ class Menu():
 
 		# Map Num Cell Text
 		self.mapNumCellFont = pygame.font.Font('Assets/Fonts/AmaticSC-Bold.ttf', 40 * self.screenWidth // Const.DELL[0])
-		mapNumCellStr = "MAP " + str(self.mapSize - 10) + " (" + str(self.mapSize) + "x" + str(self.mapSize) + ")"
+		mapNumCellStr = "MAP " + str(self.mapID)
 		self.mapNumCellText = self.mapNumCellFont.render(mapNumCellStr, True, Const.WHITE)
 		mapNumCellHeight = self.mapNumCellFont.size(mapNumCellStr)[1]
 		mapNumCellWidth = self.mapNumCellFont.size(mapNumCellStr)[0]
@@ -185,25 +187,25 @@ class Menu():
 					if self.tickMode[i] == 1:
 						listTeam.append(i)
 
-				jsonFile = findJsonFile(listTeam)[0]
+				jsonFile = findJsonFile(listTeam, self.mapID)[0]
 
 				# print(jsonFile)
 				if jsonFile != -1:
-					newListTeam = findJsonFile(listTeam)[1]
+					newListTeam = findJsonFile(listTeam, self.mapID)[1]
 					self.running = False
 					InGame.Run(jsonFile, newListTeam)
 					break
 
 			upState = self.upButton.isClicked(self.gameScreen)
-			if upState == True and self.mapSize < 21:
-				self.mapSize += 1
-				mapNumCellStr = "MAP " + str(self.mapSize - 10) + " (" + str(self.mapSize) + "x" + str(self.mapSize) + ")"
+			if upState == True and self.mapID < 7:
+				self.mapID += 1
+				mapNumCellStr = "MAP " + str(self.mapID)
 				self.mapNumCellText = self.mapNumCellFont.render(mapNumCellStr, True, Const.WHITE)
 
 			downState = self.downButton.isClicked(self.gameScreen)
-			if downState == True and self.mapSize > 11:
-				self.mapSize -= 1
-				mapNumCellStr = "MAP " + str(self.mapSize - 10) + " (" + str(self.mapSize) + "x" + str(self.mapSize) + ")"
+			if downState == True and self.mapID > 1:
+				self.mapID -= 1
+				mapNumCellStr = "MAP " + str(self.mapID)
 				self.mapNumCellText = self.mapNumCellFont.render(mapNumCellStr, True, Const.WHITE)
 
 			# Draw Window
