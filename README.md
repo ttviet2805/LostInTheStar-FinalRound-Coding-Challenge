@@ -22,7 +22,7 @@ This is interactive problem that the participant need to code a program to draw 
 ```
   git clone https://github.com/ttviet2805/Coding-Challenge-BombIT.git
 ```
-* Set up [Pygame Library]:
+* Set up Pygame Library:
 ```
   python3 -m pip install -U pygame --user
 ```
@@ -35,22 +35,17 @@ This is interactive problem that the participant need to code a program to draw 
 ## Usage
 * Game Menu Screen
 <div align = "center">
-  <img src = "Game-Demo/Menu.PNG" style = "width: 50%;">
+  <img src = "Assets/Images/Game-Demo/image-1.png" style = "width: 50%;">
 </div>
 
-* Select Character Screen
+* Game Screen
 <div align = "center">
-  <img src = "Game-Demo/SelectCharacter.PNG" style = "width: 50%;">
-</div>
-
-* Crossy Road Screen
-<div align = "center">
-  <img src = "Game-Demo/Game.PNG" style = "width: 50%;">
+  <img src = "Assets/Images/Game-Demo/image-2.png" style = "width: 50%;">
 </div>
 
 * Leaderboard Screen
 <div align = "center">
-  <img src = "Game-Demo/LeaderBoard.PNG" style = "width: 50%;">
+  <img src = "Assets/Images/Game-Demo/image-3.png" style = "width: 50%;">
 </div>
 
 ## Contact
